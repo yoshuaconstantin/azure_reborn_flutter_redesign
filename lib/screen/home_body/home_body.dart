@@ -131,7 +131,7 @@ class _HomeBodyState extends State<HomeBody> {
                     child:textWithFont(text: "INFORMATION", color: Colors.white, fontSize: 30, fontWeight: FontWeight.w900,),
 
                   ),
-                  HomePresenceChart(chartData: modelChart,)
+                  HomePresenceChart(chartData: modelChart,type: 1,)
                 ],
               ),
             ),

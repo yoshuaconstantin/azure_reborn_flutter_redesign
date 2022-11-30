@@ -6,218 +6,350 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../additional/dimension.dart';
 import '../model/home_body_model/chart_home_model.dart';
 
-
-
 class HomePresenceChart extends StatelessWidget {
-  HomePresenceChart({
-    Key? key,
-    required this.chartData,
-  }) : super(key: key);
+  HomePresenceChart({Key? key, required this.chartData, required this.type}) : super(key: key);
 
   List<ChartDataModel> chartData;
+  int type;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-          margin: EdgeInsets.only(
-              top: Dimension.CustomSize(15),
-              right: Dimension.screenWidth * 0.05,
-              left: Dimension.screenWidth * 0.05),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.4,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xFF16173d)),
-          child: Stack(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.006, left: 15),
-                          child: Icon(
-                            MdiIcons.chartBar,
-                            size: 17,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.transparent),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: SfCartesianChart(
-                              borderWidth: 0,
-                              margin: EdgeInsets.all(0),
-                              plotAreaBorderWidth: 0,
-                              borderColor: Colors.transparent,
-                              backgroundColor: Colors.transparent,
-                              primaryXAxis: CategoryAxis(
-                                  isVisible: false, plotOffset: 0, labelPlacement: LabelPlacement.onTicks, placeLabelsNearAxisLine: false),
-                              primaryYAxis: NumericAxis(isVisible: false, plotBands: <PlotBand>[
-                                PlotBand(
-                                    opacity: 1,
-                                    textAngle: 0,
-                                    start: 0,
-                                    end: 0,
-                                    borderColor: Colors.red,
-                                    //Specify the width for the line
-                                    borderWidth: 2,
-                                    //Specify the dash array for the line
-                                    dashArray: const <double>[4, 5])
-                              ]),
-                              series: <StackedLine100Series<ChartDataModel, String>>[
-                                // Renders column chart
-                                StackedLine100Series<ChartDataModel, String>(
-                                  color: Color(0xFF101370),
-
-                                  dataSource: chartData,
-                                  opacity: 0.7,
-
-                                  // gradient: const LinearGradient(
-                                  //     colors: <Color>[
-                                  //       Color(0xFF12c2e9),
-                                  //       Color(0xFFc471ed),
-                                  //       Color(0xFFf64f59)
-                                  //     ],
-                                  //
-                                  // ),
-                                  // xValueMapper: (ChartDataModel data, _) => num.parse(data.timeIn!) == 0 ? null : DateFormat('yyyy-MM-dd hh.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(data.date!))).toString(),
-                                  xValueMapper: (ChartDataModel data, _) => data.coreName1,
-                                  yValueMapper: (ChartDataModel data, _) => data.speed1,
-                                ),
-                                StackedLine100Series<ChartDataModel, String>(
-                                  dataSource: chartData,
-                                  opacity: 0.7,
-                                  // gradient: const LinearGradient(
-                                  //     colors: <Color>[
-                                  //       Color(0xFF12c2e9),
-                                  //       Color(0xFFc471ed),
-                                  //       Color(0xFFf64f59)
-                                  //     ],
-                                  //
-                                  // ),
-                                  // xValueMapper: (ChartDataModel data, _) => num.parse(data.timeIn!) == 0 ? null : DateFormat('yyyy-MM-dd hh.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(data.date!))).toString(),
-                                  xValueMapper: (ChartDataModel data, _) => data.coreName1,
-                                  yValueMapper: (ChartDataModel data, _) => data.speed2,
-                                ),
-                                StackedLine100Series<ChartDataModel, String>(
-                                  dataSource: chartData,
-                                  opacity: 0.7,
-                                  // gradient: const LinearGradient(
-                                  //     colors: <Color>[
-                                  //       Color(0xFF12c2e9),
-                                  //       Color(0xFFc471ed),
-                                  //       Color(0xFFf64f59)
-                                  //     ],
-                                  //
-                                  // ),
-                                  // xValueMapper: (ChartDataModel data, _) => num.parse(data.timeIn!) == 0 ? null : DateFormat('yyyy-MM-dd hh.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(data.date!))).toString(),
-                                  xValueMapper: (ChartDataModel data, _) => data.coreName1,
-                                  yValueMapper: (ChartDataModel data, _) => data.speed3,
-                                ),
-                                // SplineAreaSeries<ChartDataModel, String>(
-                                //   borderWidth: 3,
-                                //   dataSource: chartData,
-                                //   opacity: 0.7,
-                                //   borderColor: Color(0xFF49a7cc),
-                                //   // gradient: const LinearGradient(
-                                //   //     colors: <Color>[
-                                //   //       Color(0xFF12c2e9),
-                                //   //       Color(0xFFc471ed),
-                                //   //       Color(0xFFf64f59)
-                                //   //     ],
-                                //   //
-                                //   // ),
-                                //   // xValueMapper: (ChartDataModel data, _) => num.parse(data.timeIn!) == 0 ? null : DateFormat('yyyy-MM-dd hh.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(data.date!))).toString(),
-                                //   xValueMapper: (ChartDataModel data, _) => data.coreName1,
-                                //   yValueMapper: (ChartDataModel data, _) => data.speed4,
-                                // ),
-                                // SplineAreaSeries<ChartDataModel, String>(
-                                //   borderWidth: 3,
-                                //   dataSource: chartData,
-                                //   opacity: 0.7,
-                                //   borderColor: Color(0xFF49a7cc),
-                                //   // gradient: const LinearGradient(
-                                //   //     colors: <Color>[
-                                //   //       Color(0xFF12c2e9),
-                                //   //       Color(0xFFc471ed),
-                                //   //       Color(0xFFf64f59)
-                                //   //     ],
-                                //   //
-                                //   // ),
-                                //   // xValueMapper: (ChartDataModel data, _) => num.parse(data.timeIn!) == 0 ? null : DateFormat('yyyy-MM-dd hh.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(data.date!))).toString(),
-                                //   xValueMapper: (ChartDataModel data, _) => data.coreName1,
-                                //   yValueMapper: (ChartDataModel data, _) => data.speed5,
-                                // ),
-                                // SplineAreaSeries<ChartDataModel, String>(
-                                //   borderWidth: 3,
-                                //   dataSource: chartData,
-                                //   opacity: 0.7,
-                                //   borderColor: Color(0xFFd1c05c),
-                                //   // gradient: const LinearGradient(
-                                //   //     colors: <Color>[
-                                //   //       Color(0xFF12c2e9),
-                                //   //       Color(0xFFc471ed),
-                                //   //       Color(0xFFf64f59)
-                                //   //     ],
-                                //   //
-                                //   // ),
-                                //   // xValueMapper: (ChartDataModel data, _) => num.parse(data.timeIn!) == 0 ? null : DateFormat('yyyy-MM-dd hh.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(data.date!))).toString(),
-                                //   xValueMapper: (ChartDataModel data, _) => data.coreName1,
-                                //   yValueMapper: (ChartDataModel data, _) => data.speed6,
-                                // ),
-                                // SplineAreaSeries<ChartDataModel, String>(
-                                //   borderWidth: 3,
-                                //   dataSource: chartData,
-                                //   opacity: 0.7,
-                                //   borderColor: Color(0xFFc79273),
-                                //   // gradient: const LinearGradient(
-                                //   //     colors: <Color>[
-                                //   //       Color(0xFF12c2e9),
-                                //   //       Color(0xFFc471ed),
-                                //   //       Color(0xFFf64f59)
-                                //   //     ],
-                                //   //
-                                //   // ),
-                                //   // xValueMapper: (ChartDataModel data, _) => num.parse(data.timeIn!) == 0 ? null : DateFormat('yyyy-MM-dd hh.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(data.date!))).toString(),
-                                //   xValueMapper: (ChartDataModel data, _) => data.coreName1,
-                                //   yValueMapper: (ChartDataModel data, _) => data.speed7,
-                                // ),
-                                // SplineAreaSeries<ChartDataModel, String>(
-                                //   borderWidth: 3,
-                                //   dataSource: chartData,
-                                //   opacity: 0.7,
-                                //   borderColor: Color(0xFF31264a),
-                                //   // gradient: const LinearGradient(
-                                //   //     colors: <Color>[
-                                //   //       Color(0xFF12c2e9),
-                                //   //       Color(0xFFc471ed),
-                                //   //       Color(0xFFf64f59)
-                                //   //     ],
-                                //   //
-                                //   // ),
-                                //   // xValueMapper: (ChartDataModel data, _) => num.parse(data.timeIn!) == 0 ? null : DateFormat('yyyy-MM-dd hh.mm').format(DateTime.fromMillisecondsSinceEpoch(int.parse(data.date!))).toString(),
-                                //   xValueMapper: (ChartDataModel data, _) => data.coreName1,
-                                //   yValueMapper: (ChartDataModel data, _) => data.speed8,
-                                // )
-                              ]),
+    return Container(
+      margin: EdgeInsets.only(left: MediaQuery
+          .of(context)
+          .size
+          .width * 0.04, right: MediaQuery
+          .of(context)
+          .size
+          .width * 0.04),
+      height: MediaQuery
+          .of(context)
+          .size
+          .height * 0.25,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      child: Stack(
+        children: [
+          Container(
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.25,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.2,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(17), bottomRight: Radius.circular(17), bottomLeft: Radius.circular(17)),
+                          color: Color(0xFF99D5C9)),
+                      child: Container(
+                        alignment: Alignment.bottomCenter,
+                        margin: EdgeInsets.only(bottom: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.02),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 3,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.white,
+                              ),
+                              margin: EdgeInsets.all(10),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.013),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Shift : ",
+                                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300, color: Color(0xFF2D0320))),
+                                    SizedBox(
+                                      height: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height * 0.002,
+                                    ),
+                                    Text("TESTING",
+                                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF2D0320))),
+                                  ],
+                                )),
+                          ],
                         ),
                       ),
-                    ],
-                  )
-                ],
-              ),
+                    ),
+                    GestureDetector(
+                      onTap: (() =>
+                      {
 
-            ],
-          )),
+                      }),
+                      child: Container(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.127,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.4,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(17), bottomRight: Radius.circular(17), bottomLeft: Radius.circular(17)),
+                            color: Color(0xFF645E9D)),
+                        child: Stack(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 3,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.white,
+                                  ),
+                                  margin: EdgeInsets.all(10),
+                                ),
+                                Container(
+                                    margin: EdgeInsets.only(top: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height * 0.013),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Shift : ",
+                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300, color: Color(0xFF99D5C9))),
+                                        SizedBox(
+                                          height: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height * 0.006,
+                                        ),
+                                        Text("TESTING",
+                                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF99D5C9))),
+                                        SizedBox(
+                                          height: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height * 0.01,
+                                        ),
+                                      ],
+                                    )),
+                              ],
+                            ),
+                            Positioned(
+                              bottom: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height * 0.02,
+                              child: Container(
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.03,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width * 0.4,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF373363),
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                                child:  Center(
+                                  child: Text("TESTING",
+                                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Colors.white)),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.2,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(17), bottomRight: Radius.circular(17), bottomLeft: Radius.circular(17)),
+                          color: Color(0xFF99D5C9)),
+                      child: Container(
+                        alignment: Alignment.bottomCenter,
+                        margin: EdgeInsets.only(bottom: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.02),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 3,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.white,
+                              ),
+                              margin: EdgeInsets.all(10),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.013),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Text("Shift : ",
+                                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300, color: Color(0xFF2D0320))),
+                                    SizedBox(
+                                      height: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height * 0.002,
+                                    ),
+                                    Text("yyyy",
+                                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF2D0320))),
+                                  ],
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: (() =>
+                      {
+
+                      }),
+                      child: Container(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.127,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.4,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(17), bottomRight: Radius.circular(17), bottomLeft: Radius.circular(17)),
+                            color: Color(0xFF645E9D)),
+                        child: Stack(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 3,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.white,
+                                  ),
+                                  margin: EdgeInsets.all(10),
+                                ),
+                                Container(
+                                    margin: EdgeInsets.only(top: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height * 0.013),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Shift : ",
+                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300, color: Color(0xFF99D5C9))),
+                                        SizedBox(
+                                          height: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height * 0.006,
+                                        ),
+                                        Text("ggggg",
+                                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF99D5C9))),
+                                        SizedBox(
+                                          height: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height * 0.01,
+                                        ),
+                                      ],
+                                    )),
+                              ],
+                            ),
+                            Positioned(
+                              bottom: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height * 0.02,
+                              child: Container(
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.03,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width * 0.4,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF373363),
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                                child: Center(
+                                  child: Text("gggggg",
+                                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Colors.white)),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
-
 }
+
