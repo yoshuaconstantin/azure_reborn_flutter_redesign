@@ -17,6 +17,7 @@ import '../../model/home_body_model/chart_home_model.dart';
 import '../../model/home_body_model/list_home_card_model.dart';
 import '../../widget/custom_neumorph.dart';
 import '../../widget/home_chart.dart';
+import '../../widget/information_widget.dart';
 import '../../widget/noOverScroll.dart';
 import '../../widget/vertical_text.dart';
 import 'home_body_bloc.dart';
@@ -75,11 +76,7 @@ class _HomeBodyState extends State<HomeBody> {
         rankingProgress: rankProgress(Preferences.getInstance().getInt(SharedPreferenceKey.FeatureDozeRank) ?? 0),
         gambarIcon: "assets/anim/lottie_json/doze.json"));
 
-    modelChart.add(ChartDataModel("Core1",randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber()));
-    modelChart.add(ChartDataModel("Core2",randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber()));
-    modelChart.add(ChartDataModel("Core3",randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber()));
-    modelChart.add(ChartDataModel("Core4",randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber()));
-    modelChart.add(ChartDataModel("Core5",randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber()));
+    //modelChart.add(ChartDataModel("Core5",randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber()));
 
 
 
@@ -131,7 +128,8 @@ class _HomeBodyState extends State<HomeBody> {
                     child:textWithFont(text: "INFORMATION", color: Colors.white, fontSize: 30, fontWeight: FontWeight.w900,),
 
                   ),
-                  HomePresenceChart(chartData: modelChart,type: 1,)
+                  InformationWidget(),
+                  //HomePresenceChart(chartData: modelChart,type: 1,)
                 ],
               ),
             ),
