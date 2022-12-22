@@ -7,6 +7,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../../additional/app_color.dart';
 import '../../additional/constant.dart';
+import '../../root_file/root_init/request_root.dart';
 import '../../widget/text_with_font.dart';
 import '../home_body/home_body.dart';
 
@@ -37,6 +38,17 @@ class _SplashScreenState extends State<SplashScreen> {
                 MaterialPageRoute(
                   builder: (context) => HomeBody(),
                 ));
+          }else if(state is onSplashCheckRootSuccess){
+            if(state.statusRoot){
+
+            }else{
+
+            }
+            setState(() {
+
+            });
+          }else if(state is Failed){
+
           }
         },
         child: Container(

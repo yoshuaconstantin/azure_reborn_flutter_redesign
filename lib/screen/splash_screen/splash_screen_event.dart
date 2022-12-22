@@ -11,3 +11,4 @@ class onButtonPressed extends SplashScreenEvent {
   onButtonPressed({required this.type});
 }
 
+class onSplashCheckRoot extends SplashScreenEvent{}

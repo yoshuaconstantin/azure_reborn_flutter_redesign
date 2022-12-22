@@ -5,6 +5,8 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../root_file/root_init/request_root.dart';
+
 part 'splash_screen_event.dart';
 part 'splash_screen_state.dart';
 
@@ -15,6 +17,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
     });
     on<onCheckSharedPref>(_checkSharedPref);
     on<onButtonPressed>(_chooseTypePressed);
+    on<onSplashCheckRoot>(_checkRoot);
   }
 
   FutureOr<void> _checkSharedPref(onCheckSharedPref event, Emitter<SplashScreenState> emit) async {
@@ -42,5 +45,25 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
       emit(GoToMainHome());
     }
 
+  }
+
+
+  FutureOr<void> _checkRoot(onSplashCheckRoot event, Emitter<SplashScreenState> emit) async {
+    try{
+      emit(Loading());
+
+      bool checkRoot = await RequestRoot().checkRoot();
+
+      if(checkRoot){
+        emit(onSplashCheckRootSuccess(statusRoot: true));
+      }else{
+        emit(onSplashCheckRootSuccess(statusRoot: false));
+      }
+
+    }catch(e){
+      String message = e.toString();
+
+      emit(Failed(message: message));
+    }
   }
 }

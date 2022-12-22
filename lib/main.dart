@@ -1,3 +1,4 @@
+import 'package:azure_reborn/screen/cpu_information_screen/bloc/cpu_information_bloc.dart';
 import 'package:azure_reborn/screen/home_body/home_body.dart';
 import 'package:azure_reborn/screen/home_body/home_body_bloc.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SplashScreenBloc(),),
-        BlocProvider(create: (_) => HomeBodyBloc(),)
+        BlocProvider(create: (_) => HomeBodyBloc(),),
+        BlocProvider(create: (_) => CpuInformationBloc(),),
 
       ],
       child: GetMaterialApp(

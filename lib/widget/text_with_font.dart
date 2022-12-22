@@ -7,8 +7,9 @@ class textWithFont extends StatelessWidget {
   String? fontFamily;
   Color color;
   double wordSpacing;
+  TextAlign? alignment;
 
-  textWithFont({Key? key, required this.text, this.fontSize = 13, this.fontFamily, this.fontWeight, required this.color, this.wordSpacing = 1}) : super(key: key);
+  textWithFont({Key? key, required this.text, this.fontSize = 13, this.fontFamily, this.fontWeight, required this.color, this.wordSpacing = 1, this.alignment}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,9 @@ class textWithFont extends StatelessWidget {
         fontWeight: fontWeight,
         fontFamily: fontFamily,
         color: color,
-        wordSpacing: wordSpacing ),);
+        wordSpacing: wordSpacing,
+        ),
+        textAlign: alignment ?? TextAlign.start,
+    );
   }
 }

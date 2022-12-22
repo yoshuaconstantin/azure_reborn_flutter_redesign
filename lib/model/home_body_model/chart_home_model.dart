@@ -1,6 +1,6 @@
 class ChartDataModel {
   String coreName1;
-  int clockSpeed;
+  double clockSpeed;
 
   ChartDataModel({required this.coreName1, required this.clockSpeed});
 }
