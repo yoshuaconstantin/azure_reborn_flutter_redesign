@@ -12,6 +12,8 @@ class AppColor {
   static Color lightWhite = const Color(0xFFffffff);
   static Color gray = const Color(0xFF627676);
   static Color neoShadow = const Color(0xFF202225);
+  static Color littleLightBlack = const Color(0xFF353535);
+  static Color littleDarkSeaBlue = const Color(0xFF70D7DE);
   static Color neoBackground = const Color(0xFF26282b);
   static Color neoLightShadow = const Color(0xFF2c2e31);
   static Color lightNeoShadow = const Color(0xFFd9d9d9);

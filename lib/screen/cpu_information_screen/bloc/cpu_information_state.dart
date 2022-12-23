@@ -14,7 +14,7 @@ class Failed extends CpuInformationState {
 }
 
 class onGetClockDataSucces extends CpuInformationState {
-  List<ChartDataModel> core0;
+  double core0;
   double core1;
   double core2;
   double core3;
@@ -22,7 +22,15 @@ class onGetClockDataSucces extends CpuInformationState {
   double core5;
   double core6;
   double core7;
-  int gpu;
+  int nextInt;
+  double gpuMax;
+  double gpuMin;
+  double gpuFreq;
+  double swapUsed;
+  double swapTotal;
+  double GpuThermal;
+
+  double memUsed ;
 
   onGetClockDataSucces(
       {required this.core0,
@@ -33,5 +41,13 @@ class onGetClockDataSucces extends CpuInformationState {
       required this.core5,
       required this.core6,
       required this.core7,
-      required this.gpu});
+      required this.nextInt,
+      required this.gpuMax,
+      required this.gpuMin,
+      required this.gpuFreq,
+      required this.memUsed,
+      required this.swapTotal,
+      required this.swapUsed,
+      required this.GpuThermal,
+      });
 }

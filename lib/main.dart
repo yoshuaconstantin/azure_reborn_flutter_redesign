@@ -4,6 +4,7 @@ import 'package:azure_reborn/screen/home_body/home_body_bloc.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preferences.getInstance().init();
 
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      // statusBarColor: Colors.red, // You can use this as well
+      statusBarIconBrightness: Brightness.dark, // OR Vice Versa for ThemeMode.dark
+      statusBarBrightness: Brightness.light, // OR Vice Versa for ThemeMode.dark
+    ),
+  );
   runApp(const MyApp());
 
 

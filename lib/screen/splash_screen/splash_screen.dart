@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    context.read<SplashScreenBloc>().add(onSplashCheckRoot());
   }
 
   @override
