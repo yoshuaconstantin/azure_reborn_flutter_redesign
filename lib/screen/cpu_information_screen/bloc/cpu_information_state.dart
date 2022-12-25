@@ -29,8 +29,11 @@ class onGetClockDataSucces extends CpuInformationState {
   double swapUsed;
   double swapTotal;
   double GpuThermal;
+  String swapType;
+  int swappiness;
 
   double memUsed ;
+  double memTotal;
 
   onGetClockDataSucces(
       {required this.core0,
@@ -46,8 +49,13 @@ class onGetClockDataSucces extends CpuInformationState {
       required this.gpuMin,
       required this.gpuFreq,
       required this.memUsed,
+      required this.memTotal,
       required this.swapTotal,
       required this.swapUsed,
       required this.GpuThermal,
+      required this.swappiness,
+      required this.swapType,
+
+
       });
 }

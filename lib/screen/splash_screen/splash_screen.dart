@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ));
           }else if(state is onSplashCheckRootSuccess){
             if(state.statusRoot){
-
+              RequestRoot().nonReturnRootFunction("-c");
             }else{
 
             }

@@ -6,6 +6,7 @@ import 'package:azure_reborn/widget/custom_dialog.dart';
 import 'package:azure_reborn/widget/text_with_font.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:lottie/lottie.dart';
@@ -20,6 +21,7 @@ import '../../widget/home_chart.dart';
 import '../../widget/information_widget.dart';
 import '../../widget/noOverScroll.dart';
 import '../../widget/vertical_text.dart';
+import '../profile_tuning_screen/profile_tuning_page.dart';
 import 'home_body_bloc.dart';
 
 class HomeBody extends StatefulWidget {
@@ -448,7 +450,14 @@ class _HomeBodyState extends State<HomeBody> {
       child: ListView.builder(itemBuilder: (context, index) =>
           InkWell(
             onTap: (){
-
+            if(index == 0 ){
+              HapticFeedback.lightImpact();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileTuningPage(),
+                  ));
+           }
             },
             child: Container(
               margin: EdgeInsets.only(right: Dimension.width15),

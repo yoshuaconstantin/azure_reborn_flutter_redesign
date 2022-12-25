@@ -38,14 +38,15 @@ dependencies:
   material_design_icons_flutter: ^6.0.7096
   flutter_bloc: ^8.1.1
   get: ^4.6.5
-  carousel_slider: ^4.1.1
+  carousel_slider: ^4.2.1
   flutter_launcher_icons: ^0.11.0
   flutter_neumorphic: ^3.2.0
   shared_preferences: ^2.0.15
-  lottie: ^2.0.0
-  flutter_background_service: ^2.4.5
-  flutter_local_notifications: ^12.0.4
-  syncfusion_flutter_charts: ^20.3.59
+  lottie: ^2.1.0
+  flutter_background_service: ^2.4.6
+  flutter_local_notifications: ^13.0.0
+  syncfusion_flutter_charts: ^20.4.38
+  flutter_rounded_progress_bar: 0.2.0
 
 dev_dependencies:
   flutter_test:

@@ -45,6 +45,23 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
 
       String GPUThermal = await RequestRoot().returnStringRootFucntion(Constant().thermalZoneGPU);
 
+      String swappiness = await RequestRoot().returnStringRootFucntion(Constant().swappiness);
+      String swapType = await RequestRoot().returnStringRootFucntion(Constant().swaptype);
+
+      String trimmedSwapType = "";
+
+      if(swapType.contains("[zstd]")){
+        trimmedSwapType = "Lstd";
+      }else if(swapType.contains("[lz4]")){
+        trimmedSwapType = "Lz4" ;
+      }else if(swapType.contains("[lzo-rle]")){
+        trimmedSwapType = "Lzo-rle" ;
+      }else if(swapType.contains("[lzo]")){
+        trimmedSwapType = "Lzo";
+      }else{
+        trimmedSwapType = "UNKNOWN";
+      }
+
 
       double swapUsed = double.parse(swapAvail) / double.parse(swapTotal);
 
@@ -65,7 +82,10 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
           memUsed: memUsed,
           swapTotal: double.parse(swapTotal),
           swapUsed: swapUsed,
-          GpuThermal: double.parse(GPUThermal)
+          GpuThermal: double.parse(GPUThermal),
+          swappiness: int.parse(swappiness),
+          swapType: trimmedSwapType,
+          memTotal: double.parse(MemTotal),
       ));
 
 

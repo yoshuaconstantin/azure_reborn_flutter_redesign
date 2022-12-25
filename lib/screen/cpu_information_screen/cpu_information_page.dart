@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:azure_reborn/widget/text_with_font.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../additional/app_color.dart';
+import '../../additional/constant.dart';
 import '../../additional/dimension.dart';
 import '../../model/home_body_model/chart_home_model.dart';
 import 'bloc/cpu_information_bloc.dart';
@@ -23,7 +25,9 @@ class CpuInformationPage extends StatefulWidget {
 class _CpuInformationPageState extends State<CpuInformationPage> {
   List<ChartDataModel> chartData = [];
 
-  int nextInt = 1;
+  String swapType = "" ;
+
+  int nextInt = 1, swappiness = 0, totalRam = 0;
 
   double core0 = 0, core1 = 0, core2 = 0, core3 = 0,core4 = 0 , core5 = 0, core6 = 0, core7 = 0;
 
@@ -32,6 +36,8 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
   double GPUThermal = 0, GPUMax = 0, GPUMin = 0, GPUFreq = 0;
 
   double memUsed = 0;
+
+  bool swapStatus = false;
 
   late Timer timer;
 
@@ -54,6 +60,8 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
               core7 = state.core7;
               nextInt = state.nextInt;
 
+              swapType = state.swapType;
+              swappiness = state.swappiness;
               swapTotal = (state.swapTotal * 0.000001);
               swapUsed = state.swapUsed ;
 
@@ -63,6 +71,20 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
               GPUMax   = state.gpuMax;
               GPUMin  = state.gpuMin;
               GPUFreq  = state.gpuFreq;
+
+              String memT = state.memTotal.toStringAsFixed(0);
+
+              if(swapTotal > 1){
+                swapStatus = true;
+              }else{
+                swapStatus = false;
+              }
+
+              if(int.parse(memT)/1000000 > 6 && int.parse(memT)/1000000 < 9){
+                totalRam = 8;
+              }else if(int.parse(memT)/1000000 > 9){
+                totalRam = 12;
+              }
             });
             if(chartData.length > 10){
               chartData.removeAt(0);
@@ -470,7 +492,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                textWithFont(text: "RANDOM ACCES MEMORY", color: AppColor.littleLightBlack, fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',),
+                textWithFont(text: "RANDOM ACCESS MEMORY", color: AppColor.littleLightBlack, fontSize: 19, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',),
                 SizedBox(height: Dimension.CustomSize(2),),
                 textWithFont(text: "UTILITIES & HARDWARE", color: AppColor.littleLightBlack, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'ralewayLight',),
                 SizedBox(height: Dimension.CustomSize(15),),
@@ -478,7 +500,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
                   children: [
                     Icon(Icons.sd_storage, color: AppColor.littleLightBlack, size: 30,),
                     SizedBox(width: Dimension.CustomSize(4),),
-                    textWithFont(text: "8 GB", color: AppColor.littleLightBlack, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',),
+                    textWithFont(text: totalRam.toString()+" GB", color: AppColor.littleLightBlack, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',),
                     SizedBox(width: Dimension.CustomSize(15),),
                     Icon(Icons.info, color: AppColor.littleLightBlack, size: 30,),
                     SizedBox(width: Dimension.CustomSize(4),),
@@ -543,7 +565,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
                             ),
                             Expanded(
                                 child:
-                                textWithFont(text: "Lzo-rle", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
+                                textWithFont(text: swapType, color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
                             )
                           ],
                         ),
@@ -558,7 +580,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
                             ),
                             Expanded(
                                 child:
-                                textWithFont(text: "100%", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
+                                textWithFont(text: swappiness.toString()+"%", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
                             )
                           ],
                         ),
@@ -571,8 +593,8 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
                                 style: ProgressStyle(
                                     disableDepth: true,
                                     borderRadius: BorderRadius.circular(25),
-                                    accent: AppColor.littleDarkSeaBlue,
-                                    variant: AppColor.littleDarkSeaBlue
+                                    accent: Color(0xFF7986F7),
+                                    variant: Color(0xFF7986F7)
                                 ),
                                 percent: swapUsed,
                               ),
@@ -586,7 +608,8 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
                   Positioned(
                       right: 5,
                       top: 5,
-                      child: Icon(Icons.circle, size: 15, color: Colors.green,)
+                      child: swapStatus ? Icon(Icons.circle, size: 15, color: Colors.green,)
+                          : Icon(Icons.circle, size: 15, color: Colors.red,)
                   )
                 ],
               )),
@@ -598,6 +621,16 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
 
   //Widget ETC
   Widget additional(){
+    Random objectname = Random();
+    int number = objectname.nextInt(QuotesRandom().quotesLenght());
+
+    // await prefs.setString(SharedPreferenceKey.ProcessorKey.name, "SD888");
+    // int day = DateTime.now().day;
+
+    int day = DateTime.now().day;
+
+
+    print(day);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -606,6 +639,14 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
           height: Dimension.screenHeight * 0.15,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleDarkSeaBlue),
           padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              textWithFont(text: "QUOTES OF THE DAY",  color: AppColor.littleLightBlack, fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold'),
+              SizedBox(height: Dimension.CustomSize(20),),
+              textWithFont(text: QuotesRandom().quotes(number),  color: AppColor.littleLightBlack, fontSize: 16, fontWeight: FontWeight.w900,),
+            ],
+          ),
         ),
         Container(
           width:Dimension.screenWidth * 0.3,

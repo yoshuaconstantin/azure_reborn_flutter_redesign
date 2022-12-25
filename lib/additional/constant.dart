@@ -37,6 +37,9 @@ class Constant {
   final String swapTotal = "cat /proc/meminfo | grep SwapTotal | awk '{print \$2}'";
   final String swapUsed = "cat /proc/meminfo | grep SwapFree | awk '{print \$2}'";
 
+  final String swappiness = "cat /proc/sys/vm/swappiness";
+  final String swaptype = "cat /sys/block/zram0/comp_algorithm";
+
 
   final String thermalZoneGPU ="cat /sys/class/thermal/thermal_zone32/temp | awk '{print \$1/1000}'";
 
@@ -49,5 +52,54 @@ enum SharedPreferenceKey {
   TimeElapsed,
   FeatureModeRank,
   FeatureThermalRank,
-  FeatureDozeRank
+  FeatureDozeRank,
+  DailyTimer,
+  ChillTimesUsed,
+  SmartTimesUsed,
+  FastTimesUsed,
+
+}
+
+class QuotesRandom{
+
+List<String> Quotes =
+[
+  "Don't use FAST AF if you want to have better battery backup, use Chill instead",
+  "For daily basis use SMART to get both stable performance and battery backup",
+  "Disable Zram help you get better battery backup",
+  "Turning down Swappiness get you a little bit of more battery backup",
+  "Chill mode is designed for best battery backup, not for hard gaming",
+  "Doze mode help you to get better Off Screen Battery Drain",
+  "Raise your activeness to get LEGENDS rank on each FEATURES!",
+  "This new Remake Azure TW is using Flutter for the code",
+  "Don't get lazy, do some work guys.."
+
+];
+
+///QuotesLenght for number of Quotes
+int quotesLenght() {
+  int quotesLenght1 = Quotes.length;
+  return quotesLenght1;
+}
+
+///Use next random int go get random String of Quotes. ex - quotes(1); will return String of quotes
+String quotes(int number) {
+  List Q = Quotes;
+
+  return Q[number];
+}}
+
+///List of ProfilesConstant
+class ProfilesConstant{
+
+  final String version = "1.0";
+  final String revision = "26/7/22";
+  final String status = "STABLE";
+  final String creator = "r0thBaby";
+
+  final String chillTopText = "Chill like Ice";
+  final String smartTopText = "Do you like being smart?";
+  final String fastTopText = "You know fast? FAAAASSTT!";
+
+
 }
