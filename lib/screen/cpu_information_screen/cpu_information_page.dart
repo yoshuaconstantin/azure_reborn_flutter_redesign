@@ -12,7 +12,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../additional/app_color.dart';
 import '../../additional/constant.dart';
 import '../../additional/dimension.dart';
+import '../../helper/dialogs.dart';
 import '../../model/home_body_model/chart_home_model.dart';
+import '../../model/information_zram_model/zram_setting_model.dart';
 import 'bloc/cpu_information_bloc.dart';
 
 class CpuInformationPage extends StatefulWidget {
@@ -36,6 +38,8 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
   double GPUThermal = 0, GPUMax = 0, GPUMin = 0, GPUFreq = 0;
 
   double memUsed = 0;
+
+  ZramSettingModel? zramSettingModel;
 
   bool swapStatus = false;
 
@@ -532,77 +536,84 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
               flex: 2,
               child: Stack(
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(5), horizontal: Dimension.CustomSize(10)),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleLightBlack),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(child: textWithFont(text: "ZRAM", color: AppColor.littleDarkSeaBlue, fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)),
-                        SizedBox(height: Dimension.CustomSize(15),),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                                child:
-                                textWithFont(text: "SIZE", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
-                            ),
-                            Expanded(
-                                child:
-                                textWithFont(text: swapTotal.toStringAsFixed(0) + " GB", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
-                            )
-                          ],
-                        ),
-                        SizedBox(height: Dimension.CustomSize(2),),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                                child:
-                                textWithFont(text: "TYPE", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
-                            ),
-                            Expanded(
-                                child:
-                                textWithFont(text: swapType, color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
-                            )
-                          ],
-                        ),
-                        SizedBox(height: Dimension.CustomSize(2),),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                                child:
-                                textWithFont(text: "POWER", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
-                            ),
-                            Expanded(
-                                child:
-                                textWithFont(text: swappiness.toString()+"%", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
-                            )
-                          ],
-                        ),
-                        SizedBox(height: Dimension.CustomSize(15),),
-                        Expanded(
-                          child: Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: NeumorphicProgress(
-                                style: ProgressStyle(
-                                    disableDepth: true,
-                                    borderRadius: BorderRadius.circular(25),
-                                    accent: Color(0xFF7986F7),
-                                    variant: Color(0xFF7986F7)
+                  InkWell(
+                    onTap: (){
+                      Dialogs.zramSetting(buildContext: context, callback: (zramSettingModels){
+                        zramSettingModel = zramSettingModels;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(5), horizontal: Dimension.CustomSize(10)),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleLightBlack),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(child: textWithFont(text: "ZRAM", color: AppColor.littleDarkSeaBlue, fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)),
+                          SizedBox(height: Dimension.CustomSize(15),),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  child:
+                                  textWithFont(text: "SIZE", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
+                              ),
+                              Expanded(
+                                  child:
+                                  textWithFont(text: swapTotal.toStringAsFixed(0) + " GB", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
+                              )
+                            ],
+                          ),
+                          SizedBox(height: Dimension.CustomSize(2),),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  child:
+                                  textWithFont(text: "TYPE", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
+                              ),
+                              Expanded(
+                                  child:
+                                  textWithFont(text: swapType, color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
+                              )
+                            ],
+                          ),
+                          SizedBox(height: Dimension.CustomSize(2),),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  child:
+                                  textWithFont(text: "POWER", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
+                              ),
+                              Expanded(
+                                  child:
+                                  textWithFont(text: swappiness.toString()+"%", color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold',)
+                              )
+                            ],
+                          ),
+                          SizedBox(height: Dimension.CustomSize(15),),
+                          Expanded(
+                            child: Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(25),
+                                child: NeumorphicProgress(
+                                  style: ProgressStyle(
+                                      disableDepth: true,
+                                      borderRadius: BorderRadius.circular(25),
+                                      accent: Color(0xFF7986F7),
+                                      variant: Color(0xFF7986F7)
+                                  ),
+                                  percent: swapUsed,
                                 ),
-                                percent: swapUsed,
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: Dimension.CustomSize(5),),
-                      ],
+                          SizedBox(height: Dimension.CustomSize(5),),
+                        ],
+                      ),
                     ),
                   ),
                   Positioned(
@@ -630,7 +641,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
     int day = DateTime.now().day;
 
 
-    print(day);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
