@@ -59,3 +59,8 @@ class onGetClockDataSucces extends CpuInformationState {
 
       });
 }
+
+class onSetZramSettingSucces extends CpuInformationState {
+
+}
+

@@ -8,3 +8,8 @@ class onGetClockData extends CpuInformationEvent {
 
   onGetClockData({required this.nextInt});
 }
+class onChangeZramSetting extends CpuInformationEvent {
+  ZramSettingModel data;
+
+  onChangeZramSetting({required this.data});
+}

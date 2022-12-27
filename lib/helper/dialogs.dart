@@ -111,7 +111,9 @@ class Dialogs {
         context: buildContext,
         builder: (context) {
           double size = 0, pwr = 1, cpwr = 1;
-          int minfree = 0;
+          int minfree = 0, dirtyRatio = 0, bgrndRatio = 0;
+          String algorithm = "";
+
           return StatefulBuilder(
             builder: (context, setState) => AlertDialog(
               backgroundColor: Color(0xFF303030),
@@ -260,9 +262,26 @@ class Dialogs {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   InkWell(
-                                    onTap: (){
+                                    onTap: () async{
                                       List<SpinnerItem> spinnerItems = [];
 
+                                      List<String> comp_alg = ["zstd","lz4","lzo-rle","lzo"];
+
+                                      for(int i =0;i <comp_alg.length; i++){
+                                        spinnerItems.add( SpinnerItem(
+                                            identity: i,
+                                            description: comp_alg[i]
+                                        ));
+                                      }
+
+                                      await BottomSheets.spinner(
+                                          context: context,
+                                          title: "Zram Algorithm",
+                                          spinnerItems: spinnerItems,
+                                          onSelected: (selectedItem){
+                                            algorithm = selectedItem.description;
+                                          }
+                                      );
 
                                     },
                                     child: Container(
@@ -285,7 +304,7 @@ class Dialogs {
                                       List<SpinnerItem> spinnerItems = [];
 
                                       int minfree = 1024;
-                                      for(int i = 0; i<20; i++){
+                                      for(int i = 0; i<8; i++){
                                         minfree = minfree + minfree;
                                         spinnerItems.add( SpinnerItem(
                                             identity: i,
@@ -293,7 +312,7 @@ class Dialogs {
                                             tag: minfree));
                                       }
 
-                                      await BottomSheets.halfSpinner(
+                                      await BottomSheets.spinner(
                                           context: context,
                                           title: "MinFree Kilo Bytes",
                                           spinnerItems: spinnerItems,
@@ -319,8 +338,25 @@ class Dialogs {
                                   ),
                                   SizedBox(height: Dimension.size6,),
                                   InkWell(
-                                    onTap: (){
+                                    onTap: () async{
                                       List<SpinnerItem> spinnerItems = [];
+                                      int step = 10;
+                                      for(int i = 0; i<=100; i+=step){
+                                        spinnerItems.add( SpinnerItem(
+                                            identity: i,
+                                            description: i.toString()+"%",
+                                            tag: i));
+                                      }
+
+                                      await BottomSheets.spinner(
+                                          context: context,
+                                          title: "Dirty Ratio",
+                                          spinnerItems: spinnerItems,
+                                          onSelected: (selectedItem){
+                                            dirtyRatio = selectedItem.tag;
+                                          }
+                                      );
+            
                                     },
                                     child: Container(
                                       width: double.infinity,
@@ -338,9 +374,24 @@ class Dialogs {
                                   ),
                                   SizedBox(height: Dimension.size6,),
                                   InkWell(
-                                    onTap: (){
+                                    onTap: () async{
                                       List<SpinnerItem> spinnerItems = [];
+                                      int step = 10;
+                                      for(int i = 0; i<=100; i+=step){
+                                        spinnerItems.add( SpinnerItem(
+                                            identity: i,
+                                            description: i.toString()+"%",
+                                            tag: i));
+                                      }
 
+                                      await BottomSheets.spinner(
+                                          context: context,
+                                          title: "Background Ratio",
+                                          spinnerItems: spinnerItems,
+                                          onSelected: (selectedItem){
+                                            bgrndRatio = selectedItem.tag;
+                                          }
+                                      );
 
                                     },
                                     child: Container(
@@ -373,9 +424,18 @@ class Dialogs {
                         bottom: 0,
                         right: 0,
                         child: InkWell(
-                          onTap: (){
-                            var pop = FlushBarWidget.showSuccess("Zram Setting Saved!");
-                            Navigator.pop(context,pop);
+                          onTap: () async {
+                            callback.call( ZramSettingModel(
+                                size: size.floor(),
+                                power: pwr.floor(),
+                                cachePower: cpwr.floor(),
+                                algorithm: algorithm,
+                                minfree: minfree,
+                                dirtyRatio: dirtyRatio.floor(),
+                                backgroundRatio: bgrndRatio.floor()
+                            ));
+
+                            FlushBarWidget.showSuccess("Zram Setting Saved!").show(context).whenComplete(() => Navigator.pop(context));
                           },
                           child: Container(
                               decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xFF2D033B)),
@@ -385,6 +445,7 @@ class Dialogs {
                         )),
                   ],
                 ),
+
                 actionsPadding: EdgeInsets.only(
                     right: Dimension.width20,
                     bottom: Dimension.height20

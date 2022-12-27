@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:azure_reborn/widget/FlushBar.dart';
 import 'package:azure_reborn/widget/text_with_font.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -93,8 +94,12 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
             if(chartData.length > 10){
               chartData.removeAt(0);
             }
-          }if(state is doNothing){
+          }else if(state is doNothing){
             //Do Nothing
+          }else if(state is onSetZramSettingSucces){
+            FlushBarWidget.showSuccess("Zram Setting Applied").show(context);
+          }else if(state is Failed){
+            FlushBarWidget.showFailure(state.message).show(context);
           }
         },
         child: Container(
@@ -537,10 +542,13 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
               child: Stack(
                 children: [
                   InkWell(
-                    onTap: (){
-                      Dialogs.zramSetting(buildContext: context, callback: (zramSettingModels){
+                    onTap: () async {
+                      await Dialogs.zramSetting(buildContext: context, callback: (zramSettingModels){
                         zramSettingModel = zramSettingModels;
                       });
+                      context.read<CpuInformationBloc>().add(onChangeZramSetting(
+                        data: zramSettingModel!
+                      ));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(5), horizontal: Dimension.CustomSize(10)),

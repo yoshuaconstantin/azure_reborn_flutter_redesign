@@ -88,7 +88,7 @@ class FlushBarWidget {
     return Flushbar(
         margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        titleText: const Text("Berhasil", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+        titleText: const Text("Succes", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
         messageText: Text(message, style: const TextStyle(color: Colors.white, fontSize: 16)),
         duration: const Duration(seconds: 2),
         backgroundColor: Colors.green,

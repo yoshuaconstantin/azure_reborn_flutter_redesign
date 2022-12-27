@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:azure_reborn/additional/constant.dart';
+import 'package:azure_reborn/model/information_zram_model/zram_setting_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -16,6 +17,7 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
       // TODO: implement event handler
     });
     on<onGetClockData>(_getClockData);
+    on<onChangeZramSetting>(_setZramSetting);
   }
 
   FutureOr<void> _getClockData(onGetClockData event, Emitter<CpuInformationState> emit) async {
@@ -88,6 +90,60 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
           memTotal: double.parse(MemTotal),
       ));
 
+
+
+    }catch(e){
+
+    }
+  }
+
+  FutureOr<void> _setZramSetting(onChangeZramSetting event, Emitter<CpuInformationState> emit) async {
+    try{
+      emit(doNothing());
+
+      //set Algorithm
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.algorithm} > /sys/block/zram0/comp_algorithm");
+      //set MinFree
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.minfree} > ?");
+      //set Background Ratio
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.backgroundRatio} > ?");
+      //set Dirty Ratio
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.dirtyRatio} > ?");
+      //set Zram Size
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.size} > /sys/block/zram0/disksize");
+      //set Swappiness
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.power} > ?");
+      //set Cache Preassure
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.cachePower} > ?");
+
+      List<String> checkingValue = [
+        "cat ",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ];
+      List<String> name = [];
+      for(int i =0;i<=checkingValue.length;i++){
+        name[i] = await RequestRoot().returnStringRootFucntion("${checkingValue[i]}");
+        if(name[0] != "[${event.data.algorithm}]"){
+          emit(Failed(message: "Algorithm set Failed"));
+        }else if(name[1] != event.data.minfree){
+        emit(Failed(message: "MinFree set Failed"));
+        }else if(name[2] != event.data.backgroundRatio){
+          emit(Failed(message: "Background Ratio set Failed"));
+        }else if(name[3] != event.data.dirtyRatio){
+          emit(Failed(message: "Dirty Ratio set Failed"));
+        }else if(name[4] != event.data.size){
+          emit(Failed(message: "Zram Size set Failed"));
+        }else if(name[5] != event.data.power){
+          emit(Failed(message: "Swappiness set Failed"));
+        }else if(name[6] != event.data.cachePower){
+          emit(Failed(message: "Cache Preassure set Failed"));
+        }
+      }
 
 
     }catch(e){
