@@ -49,6 +49,7 @@ dependencies:
   flutter_rounded_progress_bar: 0.2.0
   syncfusion_flutter_sliders: ^20.4.38
   another_flushbar: ^1.12.29
+  root_access: ^1.0.4
   basic_utils: ^5.4.2
   syncfusion_flutter_core: ^20.4.38
 

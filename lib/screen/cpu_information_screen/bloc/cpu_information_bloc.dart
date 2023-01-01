@@ -104,27 +104,28 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
       //set Algorithm
       await RequestRoot().returnStringRootFucntion("echo ${event.data.algorithm} > /sys/block/zram0/comp_algorithm");
       //set MinFree
-      await RequestRoot().returnStringRootFucntion("echo ${event.data.minfree} > ?");
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.minfree} > /sys/module/lowmemorykiller/parameters/minfree");
       //set Background Ratio
-      await RequestRoot().returnStringRootFucntion("echo ${event.data.backgroundRatio} > ?");
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.backgroundRatio} > /proc/sys/vm/dirty_background_ratio");
       //set Dirty Ratio
-      await RequestRoot().returnStringRootFucntion("echo ${event.data.dirtyRatio} > ?");
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.dirtyRatio} > /proc/sys/vm/dirty_ratio");
       //set Zram Size
       await RequestRoot().returnStringRootFucntion("echo ${event.data.size} > /sys/block/zram0/disksize");
       //set Swappiness
-      await RequestRoot().returnStringRootFucntion("echo ${event.data.power} > ?");
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.power} > /proc/sys/vm/swappiness");
       //set Cache Preassure
-      await RequestRoot().returnStringRootFucntion("echo ${event.data.cachePower} > ?");
+      await RequestRoot().returnStringRootFucntion("echo ${event.data.cachePower} > proc/sys/vm/vfs_cache_pressure");
 
       List<String> checkingValue = [
-        "cat ",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "cat /sys/block/zram0/comp_algorithm",
+        "cat /sys/module/lowmemorykiller/parameters/minfree",
+        "cat /proc/sys/vm/dirty_background_ratio",
+        "cat /proc/sys/vm/dirty_ratio",
+        "cat /sys/block/zram0/disksize",
+        "cat /proc/sys/vm/swappiness",
+        "cat proc/sys/vm/vfs_cache_pressure"
       ];
+
       List<String> name = [];
       for(int i =0;i<=checkingValue.length;i++){
         name[i] = await RequestRoot().returnStringRootFucntion("${checkingValue[i]}");
@@ -142,12 +143,14 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
           emit(Failed(message: "Swappiness set Failed"));
         }else if(name[6] != event.data.cachePower){
           emit(Failed(message: "Cache Preassure set Failed"));
+        }else{
+          emit(onSetZramSettingSucces());
         }
       }
 
 
     }catch(e){
-
+    emit(catchError());
     }
   }
 }

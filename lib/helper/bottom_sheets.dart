@@ -114,7 +114,7 @@ class BottomSheets {
                               child: Scaffold(
                                   appBar: CustomAppBar(
                                       title: title,
-                                      arrowBackTapped: () => Navigators.pop(context)
+                                      arrowBackTapped: () => Navigators.pop(context), titleColor: Colors.black,
                                   ),
                                   body: spinnerItems.isNotEmpty ? SingleChildScrollView(
                                       child: Column(
@@ -242,7 +242,7 @@ class BottomSheets {
                               child: Scaffold(
                                   appBar: CustomAppBar(
                                       title: title,
-                                      arrowBackTapped: () => Navigators.pop(context)
+                                      arrowBackTapped: () => Navigators.pop(context), titleColor: Colors.black,
                                   ),
                                   body: spinnerItems.isNotEmpty ? SingleChildScrollView(
                                       child: Column(

@@ -1,12 +1,15 @@
 import 'package:azure_reborn/additional/dimension.dart';
+import 'package:azure_reborn/screen/error_screen/error_screen_page.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:root_access/root_access.dart';
 
 import '../../additional/app_color.dart';
 import '../../additional/constant.dart';
+import '../../helper/navigators.dart';
 import '../../root_file/root_init/request_root.dart';
 import '../../widget/text_with_font.dart';
 import '../home_body/home_body.dart';
@@ -30,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocListener<SplashScreenBloc, SplashScreenState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           // TODO: implement listener
           if (state is Loading) {
           } else if (state is GoToMainHome) {
@@ -41,9 +44,12 @@ class _SplashScreenState extends State<SplashScreen> {
                 ));
           }else if(state is onSplashCheckRootSuccess){
             if(state.statusRoot){
-              RequestRoot().nonReturnRootFunction("-c");
+              bool testRoot = await RootAccess.requestRootAccess;
+              if(!testRoot){
+                Navigators.errorScreen(context, "Root is not granted!");
+              }
             }else{
-
+              Navigators.errorScreen(context, "Non rooted devices!");
             }
             setState(() {
 

@@ -14,6 +14,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../additional/constant.dart';
 import '../../additional/preferences.dart';
+import '../../helper/navigators.dart';
 import '../../model/home_body_model/chart_home_model.dart';
 import '../../model/home_body_model/list_home_card_model.dart';
 import '../../widget/custom_neumorph.dart';
@@ -89,6 +90,9 @@ class _HomeBodyState extends State<HomeBody> {
     return Scaffold(
       body: BlocListener<HomeBodyBloc, HomeBodyState>(
         listener: (context, state) {
+          if(state is catchError){
+            Navigators.errorScreen(context, "Home Page Error!");
+          }
           // TODO: implement listener
         },
         child: Container(

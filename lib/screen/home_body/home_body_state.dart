@@ -4,3 +4,5 @@ part of 'home_body_bloc.dart';
 abstract class HomeBodyState {}
 
 class HomeBodyInitial extends HomeBodyState {}
+
+class catchError extends HomeBodyState {}

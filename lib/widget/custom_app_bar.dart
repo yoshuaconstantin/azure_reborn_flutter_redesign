@@ -14,7 +14,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final double? height;
   final Widget? flexibleSpace;
-
+  final Color titleColor;
+  final FontWeight? titlefontWeight;
+  final double? titlefontSize;
+  final String? titlefontFamily;
+  final Color? iconColor;
   const CustomAppBar({
     Key? key,
     required this.title,
@@ -24,9 +28,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     // this.backgroundColor = const Color(0xFFFFFFFF),
     this.statusBarColor,
     this.backgroundColor = null,
+    this.titlefontWeight,
     this.bottom,
     this.actions,
     this.height,
+    this.titlefontSize,
+    this.titlefontFamily,
+    this.iconColor,
+    required this.titleColor,
     this.flexibleSpace,
   }) : super(key: key);
 
@@ -54,9 +63,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           )
         ],
       ),
-      titleTextStyle: TextStyle(color: Theme.of(context).brightness == Brightness.dark ? AppColor.littleLightBlack : AppColor.lightWhite, fontSize: Dimension.size24, fontWeight: FontWeight.w700, fontFamily: 'Asap'),
+      titleTextStyle: TextStyle(color: titleColor, fontSize: titlefontSize != null ? titlefontSize : Dimension.size24, fontWeight: titlefontWeight !=null ? titlefontWeight :  FontWeight.w700, fontFamily: titlefontFamily !=null ? titlefontFamily : 'Asap'),
       leading: IconButton(onPressed: arrowBackTapped, icon: const Icon(Icons.arrow_back)),
-      iconTheme: IconThemeData(color: Theme.of(context).brightness == Brightness.dark ? Color(0xFFFFFFFF) : Color(0xFF323232)),
+      iconTheme: IconThemeData(color: iconColor != null ? iconColor : Colors.white),
       bottom: bottom,
       titleSpacing: 0,
       elevation: 0,

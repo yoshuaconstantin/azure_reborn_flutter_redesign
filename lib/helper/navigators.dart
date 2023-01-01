@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../screen/error_screen/error_screen_page.dart';
+
 class Navigators {
   static GlobalKey<NavigatorState> navigatorState = GlobalKey<NavigatorState>();
 
@@ -31,4 +33,13 @@ class Navigators {
       Navigator.of(buildContext).popUntil((route) => route.isFirst);
     });
   }
+
+  static void errorScreen(BuildContext buildContext, String message) {
+    Navigator.push(
+        buildContext,
+        MaterialPageRoute(
+          builder: (context) => ErrorScreen(message: "Root not granted!"),
+        ));
+  }
+
 }

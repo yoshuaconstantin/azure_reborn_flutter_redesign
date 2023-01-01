@@ -14,6 +14,7 @@ import '../../additional/app_color.dart';
 import '../../additional/constant.dart';
 import '../../additional/dimension.dart';
 import '../../helper/dialogs.dart';
+import '../../helper/navigators.dart';
 import '../../model/home_body_model/chart_home_model.dart';
 import '../../model/information_zram_model/zram_setting_model.dart';
 import 'bloc/cpu_information_bloc.dart';
@@ -100,6 +101,8 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
             FlushBarWidget.showSuccess("Zram Setting Applied").show(context);
           }else if(state is Failed){
             FlushBarWidget.showFailure(state.message).show(context);
+          }else if(state is catchError){
+            Navigators.errorScreen(context, "Function Error, report to dev!");
           }
         },
         child: Container(
@@ -546,9 +549,11 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
                       await Dialogs.zramSetting(buildContext: context, callback: (zramSettingModels){
                         zramSettingModel = zramSettingModels;
                       });
-                      context.read<CpuInformationBloc>().add(onChangeZramSetting(
-                        data: zramSettingModel!
-                      ));
+                      if(zramSettingModel != null){
+                        context.read<CpuInformationBloc>().add(onChangeZramSetting(
+                            data: zramSettingModel!
+                        ));
+                      }
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(5), horizontal: Dimension.CustomSize(10)),

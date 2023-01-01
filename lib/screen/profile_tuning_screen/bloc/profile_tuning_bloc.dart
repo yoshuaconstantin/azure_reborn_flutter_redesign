@@ -11,5 +11,10 @@ class ProfileTuningBloc extends Bloc<ProfileTuningEvent, ProfileTuningState> {
     on<ProfileTuningEvent>((event, emit) {
       // TODO: implement event handler
     });
+    on<fillProgressProfile>(_fillProgressDelayed);
+  }
+
+  FutureOr<void> _fillProgressDelayed(fillProgressProfile event, Emitter<ProfileTuningState> emit) async {
+    emit(fillProgressSucces());
   }
 }
