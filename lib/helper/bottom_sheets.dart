@@ -236,7 +236,6 @@ class BottomSheets {
                 return Material(
                     child: Column(
                         children: [
-
                           FractionallySizedBox(
                               heightFactor: 0.5,
                               child: Scaffold(

@@ -9,7 +9,11 @@ import '../screen/cpu_information_screen/cpu_information_page.dart';
 import 'custom_neumorph.dart';
 
 class InformationWidget extends StatefulWidget {
-  const InformationWidget({Key? key}) : super(key: key);
+  double cpuTemp;
+  double GpuTemp;
+  double BattTemp;
+
+  InformationWidget({Key? key, required this.cpuTemp, required this.BattTemp, required this.GpuTemp}) : super(key: key);
 
   @override
   State<InformationWidget> createState() => _InformationWidgetState();
@@ -121,7 +125,7 @@ class _InformationWidgetState extends State<InformationWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textWithFont(
-                              text: "53 C",
+                              text: widget.cpuTemp.toStringAsFixed(0)+"℃",
                               color: const Color(0xFFE5B8F4),
                               fontSize: 27,
                               fontWeight: FontWeight.w800 ,
@@ -141,7 +145,7 @@ class _InformationWidgetState extends State<InformationWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textWithFont(
-                            text: "45 C",
+                            text: widget.GpuTemp.toStringAsFixed(0)+"℃",
                             color: const Color(0xFFE5B8F4),
                             fontSize: 27,
                             fontWeight: FontWeight.w800 ,
@@ -166,7 +170,7 @@ class _InformationWidgetState extends State<InformationWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textWithFont(
-                            text: "39 C",
+                            text: widget.BattTemp.toStringAsFixed(0)+"℃",
                             color: const Color(0xFFE5B8F4),
                             fontSize: 27,
                             fontWeight: FontWeight.w800 ,

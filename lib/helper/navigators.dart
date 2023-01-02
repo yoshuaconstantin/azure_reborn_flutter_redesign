@@ -38,7 +38,7 @@ class Navigators {
     Navigator.push(
         buildContext,
         MaterialPageRoute(
-          builder: (context) => ErrorScreen(message: "Root not granted!"),
+          builder: (context) => ErrorScreen(message: message),
         ));
   }
 

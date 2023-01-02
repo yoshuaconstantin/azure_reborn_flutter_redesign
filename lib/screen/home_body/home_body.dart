@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:azure_reborn/additional/app_color.dart';
@@ -41,6 +42,9 @@ class _HomeBodyState extends State<HomeBody> {
   double experience = 0;
   Random objectname = Random();
 
+  double GpuTemp = 0, CpuTemp = 0, BattTemp = 0;
+
+  Timer? timer;
 
   List<ChartDataModel> modelChart = [];
   List<ListHomeCardModel> modelHomeCard =[];
@@ -81,9 +85,18 @@ class _HomeBodyState extends State<HomeBody> {
 
     //modelChart.add(ChartDataModel("Core5",randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber(),randomNumber()));
 
-
+    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+      context.read<HomeBodyBloc>().add(getInformationWidgetTemp());
+    });
 
 }
+
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    timer?.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +104,14 @@ class _HomeBodyState extends State<HomeBody> {
       body: BlocListener<HomeBodyBloc, HomeBodyState>(
         listener: (context, state) {
           if(state is catchError){
-            Navigators.errorScreen(context, "Home Page Error!");
+            timer?.cancel();
+            Navigators.errorScreen(context, state.message);
+          }else if(state is getInformationWidgetSucces){
+            setState(() {
+              CpuTemp = state.cpu;
+              GpuTemp = state.gpu;
+              BattTemp = state.batt;
+            });
           }
           // TODO: implement listener
         },
@@ -134,7 +154,7 @@ class _HomeBodyState extends State<HomeBody> {
                     child:textWithFont(text: "INFORMATION", color: Colors.white, fontSize: 30, fontWeight: FontWeight.w900,),
 
                   ),
-                  InformationWidget(),
+                  InformationWidget(cpuTemp: CpuTemp, BattTemp: BattTemp, GpuTemp: GpuTemp,),
                   //HomePresenceChart(chartData: modelChart,type: 1,)
                 ],
               ),

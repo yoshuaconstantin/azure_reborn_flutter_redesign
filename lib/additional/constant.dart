@@ -43,6 +43,13 @@ class Constant {
 
   final String thermalZoneGPU ="cat /sys/class/thermal/thermal_zone32/temp | awk '{print \$1/1000}'";
 
+  final String thermalZoneCpu0 ="cat /sys/class/thermal/thermal_zone45/temp | awk '{print \$1/1000}'";
+  final String thermalZoneCpu4 ="cat /sys/class/thermal/thermal_zone49/temp | awk '{print \$1/1000}'";
+  final String thermalZoneCpu7 ="cat /sys/class/thermal/thermal_zone52/temp | awk '{print \$1/1000}'";
+
+  final String thermalZoneBatt ="cat /sys/class/thermal/thermal_zone91/temp | awk '{print \$1/1000}'";
+
+
 }
 
 
