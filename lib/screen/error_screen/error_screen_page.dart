@@ -46,7 +46,8 @@ class _ErrorScreenState extends State<ErrorScreen> {
                   width: Dimension.screenWidth * 0.4,
                   height: Dimension.screenHeight * 0.07,
                   child:
-                  Center(child: textWithFont(text: "EXIT APP",
+                  Center(child:
+                  textWithFont(text: "EXIT APP",
                     color: AppColor.seaBlue,
                     fontFamily: "ralewayLight",
                     fontSize: 20,
