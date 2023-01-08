@@ -7,7 +7,11 @@ class CpuInformationInitial extends CpuInformationState {}
 
 class doNothing extends CpuInformationState {}
 
-class catchError extends CpuInformationState {}
+class catchError extends CpuInformationState {
+  String message;
+
+  catchError({required this.message});
+}
 
 
 class Failed extends CpuInformationState {

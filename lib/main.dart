@@ -4,6 +4,7 @@ import 'package:azure_reborn/screen/home_body/home_body_bloc.dart';
 import 'package:azure_reborn/screen/profile_tuning_screen/bloc/profile_tuning_bloc.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen_bloc.dart';
+import 'package:azure_reborn/screen/thermal_manager_screen/bloc/thermal_manager_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ void main() async {
   await Preferences.getInstance().init();
 
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+   const SystemUiOverlayStyle(
       // statusBarColor: Colors.red, // You can use this as well
       statusBarIconBrightness: Brightness.dark, // OR Vice Versa for ThemeMode.dark
       statusBarBrightness: Brightness.light, // OR Vice Versa for ThemeMode.dark
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => HomeBodyBloc(),),
         BlocProvider(create: (_) => CpuInformationBloc(),),
         BlocProvider(create: (_) => ProfileTuningBloc(),),
+        BlocProvider(create: (_) => ThermalManagerBloc(),),
+
 
 
       ],

@@ -5,7 +5,6 @@ import 'package:azure_reborn/model/information_zram_model/zram_setting_model.dar
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../model/home_body_model/chart_home_model.dart';
 import '../../../root_file/root_init/request_root.dart';
 
 part 'cpu_information_event.dart';
@@ -64,9 +63,7 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
         trimmedSwapType = "UNKNOWN";
       }
 
-
       double swapUsed = double.parse(swapAvail) / double.parse(swapTotal);
-
 
       emit(onGetClockDataSucces(
           core0: double.parse(Core0),
@@ -90,10 +87,8 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
           memTotal: double.parse(MemTotal),
       ));
 
-
-
     }catch(e){
-
+    emit(catchError(message: "Failed to get clock data!"));
     }
   }
 
@@ -148,9 +143,8 @@ class CpuInformationBloc extends Bloc<CpuInformationEvent, CpuInformationState> 
         }
       }
 
-
     }catch(e){
-    emit(catchError());
+    emit(catchError(message: "Failed to set Zram!"));
     }
   }
 }

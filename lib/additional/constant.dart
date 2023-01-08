@@ -110,3 +110,10 @@ class ProfilesConstant{
 
 
 }
+
+class ThermalManagerConstant {
+
+  List<String> profile = ["Dynamic","Extreme","Game","In Call","Camera","Youtube","Restore","Default","Class 0","Game 2","AR / VR","Game 3",];
+  List<int> value = [10,2,9,8,12,14,0,-1,11,13,15,16,];
+
+}

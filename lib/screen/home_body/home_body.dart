@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:azure_reborn/additional/app_color.dart';
 import 'package:azure_reborn/additional/dimension.dart';
+import 'package:azure_reborn/screen/thermal_manager_screen/thermal_manager_page.dart';
 import 'package:azure_reborn/widget/custom_dialog.dart';
 import 'package:azure_reborn/widget/text_with_font.dart';
 import 'package:flutter/cupertino.dart';
@@ -482,6 +483,14 @@ class _HomeBodyState extends State<HomeBody> {
                     builder: (context) => ProfileTuningPage(),
                   ));
            }
+            if(index == 1 ){
+              HapticFeedback.lightImpact();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ThermalManager(),
+                  ));
+            }
             },
             child: Container(
               margin: EdgeInsets.only(right: Dimension.width15),

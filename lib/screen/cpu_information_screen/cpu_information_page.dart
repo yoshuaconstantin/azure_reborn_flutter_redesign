@@ -102,7 +102,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
           }else if(state is Failed){
             FlushBarWidget.showFailure(state.message).show(context);
           }else if(state is catchError){
-            Navigators.errorScreen(context, "Function Error, report to dev!");
+            Navigators.errorScreen(context, state.message);
           }
         },
         child: Container(
@@ -117,7 +117,6 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
                 children: [
                   primeCore(),
                   perfCore()
-
                 ],
               ),
               Row(

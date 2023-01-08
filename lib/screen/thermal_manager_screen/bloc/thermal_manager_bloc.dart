@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:azure_reborn/screen/profile_tuning_screen/bloc/profile_tuning_bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -11,5 +12,26 @@ class ThermalManagerBloc extends Bloc<ThermalManagerEvent, ThermalManagerState> 
     on<ThermalManagerEvent>((event, emit) {
       // TODO: implement event handler
     });
+
+    on<setThermalSettings>(_setThermal);
+    on<refreshData>(_refresh);
+  }
+
+  FutureOr<void> _setThermal(setThermalSettings event, Emitter<ThermalManagerState> emit) async {
+    try{
+
+    }catch(e){
+      emit(onCatchError(message: "Error set thermal settings"));
+    }
+
+  }
+
+  FutureOr<void> _refresh(refreshData event, Emitter<ThermalManagerState> emit) async {
+    try{
+
+    }catch(e){
+      emit(onCatchError(message: "Error refresh thermal data"));
+    }
+
   }
 }

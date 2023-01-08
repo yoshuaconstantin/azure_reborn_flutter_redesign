@@ -13,6 +13,7 @@ class textWithFont extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Text(text,
       style: TextStyle(
         fontSize: fontSize,
@@ -21,6 +22,8 @@ class textWithFont extends StatelessWidget {
         color: color,
         wordSpacing: wordSpacing,
         ),
+
+
         textAlign: alignment ?? TextAlign.start,
     );
   }
