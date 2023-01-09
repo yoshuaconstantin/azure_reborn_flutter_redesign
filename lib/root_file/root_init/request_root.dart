@@ -28,5 +28,10 @@ class RequestRoot {
     return returnStringResult ?? "error";
   }
 
+  Future<void> ChmodRootFunction (String command, String permission) async {
+    await Root.exec(cmd: "chmod ${permission} ${command}");
+
+  }
+
 
 }

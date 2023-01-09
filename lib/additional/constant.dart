@@ -49,6 +49,9 @@ class Constant {
 
   final String thermalZoneBatt ="cat /sys/class/thermal/thermal_zone91/temp | awk '{print \$1/1000}'";
 
+  final String thermalSettings ="/sys/devices/virtual/thermal/thermal_message/sconfig'";
+
+
 
 }
 

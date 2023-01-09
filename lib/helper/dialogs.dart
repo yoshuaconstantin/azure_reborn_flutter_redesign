@@ -76,7 +76,7 @@ class Dialogs {
               content: content,
               actions: [
                 TextButton(
-                    child: Text(negative ?? "Tidak"),
+                    child: Text(negative ?? "No"),
                     onPressed: () {
                       Navigator.of(buildContext).pop();
 
@@ -86,7 +86,7 @@ class Dialogs {
                     }
                 ),
                 TextButton(
-                    child: Text(positive ?? "Iya"),
+                    child: Text(positive ?? "Yes"),
                     onPressed: () {
                       Navigator.of(buildContext).pop();
 

@@ -5,7 +5,7 @@ abstract class ThermalManagerState {}
 
 class ThermalManagerInitial extends ThermalManagerState {}
 
-class DotNothing extends ThermalManagerState {}
+class DoNothing extends ThermalManagerState {}
 
 class onRefreshSuccess extends ThermalManagerState {}
 
