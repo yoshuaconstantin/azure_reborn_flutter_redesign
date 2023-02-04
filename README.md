@@ -5,3 +5,7 @@ With a refreshed design inspired by the latest UI/UX trends, Azure Reborn is not
 Check out the design progress on Figma at bit.ly/AzureRebornDesign. 
 
 Get ready to experience a new level of mobile app excellence with Azure Reborn!
+
+Show Case WIP
+
+![WIP](https://media.giphy.com/media/S6jxr9JJIjtf1QFTVQ/giphy.gif)
