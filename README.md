@@ -1,16 +1,7 @@
-# azure_reborn
+Introducing Azure Reborn - The reimagined and modernized version of the classic Azure mobile app, now built with the powerful Flutter framework. This source code showcases my expertise in migrating Java-based apps to Flutter and integrating native Java roots to deliver a seamless experience.
 
-Migration from Azure Java native to Flutter
+With a refreshed design inspired by the latest UI/UX trends, Azure Reborn is not just functional, but also visually stunning. Optimized for Snapdragon 888 and 870 devices, this source code is a testament to my ability to create high-performing and visually appealing mobile apps. 
 
-## Getting Started
+Check out the design progress on Figma at bit.ly/AzureRebornDesign. 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Get ready to experience a new level of mobile app excellence with Azure Reborn!
