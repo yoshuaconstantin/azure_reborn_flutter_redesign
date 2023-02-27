@@ -46,6 +46,7 @@ class _ThermalManagerState extends State<ThermalManager> {
 
     RootAccess.requestRootAccess;
 
+    context.read<ThermalManagerBloc>().add(refreshData());
   }
 
 
@@ -60,17 +61,23 @@ class _ThermalManagerState extends State<ThermalManager> {
         _isSucces = true;
       });
 
-      Future.delayed(Duration(milliseconds: 2000));
+      Future.delayed(Duration(milliseconds: 2000), (){
+        setState(() {
+          _isSucces = false;
+          _selectedIndex = null;
+          isSelectedProfile = false;
+          _selectedValue = null;
+        });
+      });
 
-      setState(() {
-        _isSucces = false;
-        _selectedIndex = null;
-        isSelectedProfile = false;
-        _selectedValue = null;
+      Future.delayed(Duration(milliseconds: 2000), (){
+        context.read<ThermalManagerBloc>().add(refreshData());
       });
 
     }else if(state is onRefreshSuccess){
-
+      setState(() {
+        _selectedIndex = state.index;
+      });
     }else if(state is onFailed){
       FlushBarWidget.showFailure(state.message).show(context);
     }else if(state is onCatchError){
@@ -182,6 +189,7 @@ class _ThermalManagerState extends State<ThermalManager> {
                                   isSelectedProfile = false;
                                   _selectedValue = null;
                                 });
+                                context.read<ThermalManagerBloc>().add(refreshData());
                               }else {
                                 setState(() {
                                   _selectedIndex = index;

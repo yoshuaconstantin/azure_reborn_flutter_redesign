@@ -9,6 +9,10 @@ import '../additional/constant.dart';
 import '../additional/preferences.dart';
 import '../helper/custom_catch.dart';
 import 'endpoint/dashboards/update/dashboards_home_update_request.dart';
+import 'endpoint/profile/insert_data/profile_insert_data_request.dart';
+import 'endpoint/profile/delete_image/profile_delete_image_request.dart';
+import 'endpoint/profile/update_image/profile_update_image_request.dart';
+import 'endpoint/profile/upload_image/profile_upload_image_request.dart';
 import 'endpoint/sign_in/sign_in_request.dart';
 import 'interceptor/authorization_interceptor.dart';
 
@@ -189,7 +193,7 @@ class ApiManager {
     }
   }
 
-  Future<Response> insertDataProfile({required DashboardsHomeUpdateRequest data, bool secondTry = false}) async {
+  Future<Response> insertDataProfile({required ProfileInsertDataRequest data, bool secondTry = false}) async {
     try {
       Dio dio = await getDio(withoutAuthorizationInterceptor: true);
 
@@ -208,6 +212,75 @@ class ApiManager {
         PRIMARY = !PRIMARY;
 
         return insertDataProfile(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> insertDataProfileImage({required ProfileInsertImageRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.post(ApiUrl.PROFILE_IMAGES, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return insertDataProfileImage(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> updateDataProfileImage({required ProfileUpdateImageRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.put(ApiUrl.PROFILE_IMAGES, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return updateDataProfileImage(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> deleteDataProfileImage({required ProfileDeleteImageRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.delete(ApiUrl.PROFILE_IMAGES, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return deleteDataProfileImage(data: data, secondTry: true);
       }
     }
   }

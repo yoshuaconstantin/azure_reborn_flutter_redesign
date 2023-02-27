@@ -4,6 +4,7 @@ import 'package:azure_reborn/helper/bottom_sheets.dart';
 import 'package:azure_reborn/widget/FlushBar.dart';
 import 'package:azure_reborn/widget/text_with_font.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
 import '../additional/dimension.dart';
@@ -161,6 +162,7 @@ class Dialogs {
                                             value: size,
                                             onChanged: (value1){
                                               setState ((){
+                                                HapticFeedback.lightImpact();
                                                 size = value1;
                                               });
                                             }),
@@ -201,6 +203,9 @@ class Dialogs {
                                             value: pwr,
                                             onChanged: (value2){
                                               setState ((){
+                                                if(value2 % 10 == 0){
+                                                  HapticFeedback.lightImpact();
+                                                }
                                                 pwr = value2;
                                               });
                                             }),
@@ -241,6 +246,9 @@ class Dialogs {
                                             value: cpwr,
                                             onChanged: (value3){
                                               setState ((){
+                                                if(value3 % 10 == 0){
+                                                  HapticFeedback.lightImpact();
+                                                }
                                                 cpwr = value3;
                                               });
                                             }),

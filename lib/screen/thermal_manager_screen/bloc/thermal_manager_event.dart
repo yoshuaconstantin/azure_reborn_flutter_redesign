@@ -9,4 +9,6 @@ class setThermalSettings extends ThermalManagerEvent {
   setThermalSettings({required this.value});
 }
 
-class refreshData extends ThermalManagerEvent {}
+class refreshData extends ThermalManagerEvent {
+
+}

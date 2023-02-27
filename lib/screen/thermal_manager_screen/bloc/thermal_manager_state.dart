@@ -7,7 +7,11 @@ class ThermalManagerInitial extends ThermalManagerState {}
 
 class DoNothing extends ThermalManagerState {}
 
-class onRefreshSuccess extends ThermalManagerState {}
+class onRefreshSuccess extends ThermalManagerState {
+  int index;
+
+  onRefreshSuccess({required this.index});
+}
 
 class onSetThermalSuccess extends ThermalManagerState {}
 

@@ -17,6 +17,7 @@ import '../../helper/dialogs.dart';
 import '../../helper/navigators.dart';
 import '../../model/home_body_model/chart_home_model.dart';
 import '../../model/information_zram_model/zram_setting_model.dart';
+import '../../widget/custom_app_bar.dart';
 import 'bloc/cpu_information_bloc.dart';
 
 class CpuInformationPage extends StatefulWidget {
@@ -50,6 +51,20 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title:"CPU INFORMATION",
+        titleColor: Colors.white,
+        titlefontSize: 25,
+        titlefontFamily: "openSansExtraBold",
+        titlefontWeight: FontWeight.w900,
+        iconColor: Colors.white,
+        arrowBackTapped: () {
+          HapticFeedback.mediumImpact();
+          Navigator.pop(context);
+        },
+        backgroundColor: AppColor.littleLightBlack,
+
+      ),
       body: BlocListener<CpuInformationBloc, CpuInformationState>(
         listener: (context, state) async {
           // TODO: implement listener
@@ -108,7 +123,6 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
         child: Container(
           color: AppColor.littleLightBlack,
           padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(15), horizontal: Dimension.CustomSize(15)),
-          margin: EdgeInsets.only(top: Dimension.CustomSize(26)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -127,7 +141,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
                 ],
               ),
               ramStatus(),
-              additional()
+
             ],
           ),
         ),
@@ -316,7 +330,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleDarkSeaBlue),
       width: Dimension.screenWidth * 0.44,
-      height: Dimension.screenHeight * 0.25,
+      height: Dimension.screenHeight * 0.3,
       padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -325,30 +339,30 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
+                padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(15), horizontal: Dimension.CustomSize(10)),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleLightBlack),
                 width: Dimension.screenWidth * 0.19,
-                height: Dimension.screenHeight * 0.08,
+                height: Dimension.screenHeight * 0.1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    textWithFont(text: "Core 0", color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900,),
+                    textWithFont(text: "Core 0", color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900,),
                     SizedBox(height: Dimension.size12,),
-                    Center(child: textWithFont(text: core0.toStringAsFixed(1) +" Ghz", color: AppColor.littleDarkSeaBlue, fontSize: 15, fontWeight: FontWeight.w900,)),
+                    Center(child: textWithFont(text: core0.toStringAsFixed(1) +" Ghz", color: AppColor.littleDarkSeaBlue, fontSize: 16, fontWeight: FontWeight.w900,)),
                   ],
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
+                padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(15), horizontal: Dimension.CustomSize(10)),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleLightBlack),
                 width: Dimension.screenWidth * 0.19,
-                height: Dimension.screenHeight * 0.08,
+                height: Dimension.screenHeight * 0.1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    textWithFont(text: "Core 1", color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900,),
+                    textWithFont(text: "Core 1", color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900,),
                     SizedBox(height: Dimension.size12,),
-                    Center(child: textWithFont(text: core1.toStringAsFixed(1) +" Ghz", color: AppColor.littleDarkSeaBlue, fontSize: 15, fontWeight: FontWeight.w900,)),
+                    Center(child: textWithFont(text: core1.toStringAsFixed(1) +" Ghz", color: AppColor.littleDarkSeaBlue, fontSize: 16, fontWeight: FontWeight.w900,)),
                   ],
                 ),
               ),
@@ -358,30 +372,30 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
+                padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(15), horizontal: Dimension.CustomSize(10)),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleLightBlack),
                 width: Dimension.screenWidth * 0.19,
-                height: Dimension.screenHeight * 0.08,
+                height: Dimension.screenHeight * 0.1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    textWithFont(text: "Core 2", color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900,),
+                    textWithFont(text: "Core 2", color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900,),
                     SizedBox(height: Dimension.size12,),
-                    Center(child: textWithFont(text: core2.toStringAsFixed(1) +" Ghz", color: AppColor.littleDarkSeaBlue, fontSize: 15, fontWeight: FontWeight.w900,)),
+                    Center(child: textWithFont(text: core2.toStringAsFixed(1) +" Ghz", color: AppColor.littleDarkSeaBlue, fontSize: 16, fontWeight: FontWeight.w900,)),
                   ],
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
+                padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(15), horizontal: Dimension.CustomSize(10)),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleLightBlack),
                 width: Dimension.screenWidth * 0.19,
-                height: Dimension.screenHeight * 0.08,
+                height: Dimension.screenHeight * 0.1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    textWithFont(text: "Core 3", color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900,),
+                    textWithFont(text: "Core 3", color: Colors.white, fontSize: 15, fontWeight: FontWeight.w900,),
                     SizedBox(height: Dimension.size12,),
-                    Center(child: textWithFont(text: core3.toStringAsFixed(1) +" Ghz", color: AppColor.littleDarkSeaBlue, fontSize: 15, fontWeight: FontWeight.w900,)),
+                    Center(child: textWithFont(text: core3.toStringAsFixed(1) +" Ghz", color: AppColor.littleDarkSeaBlue, fontSize: 16, fontWeight: FontWeight.w900,)),
                   ],
                 ),
               ),
@@ -389,11 +403,11 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
           ),
           Container(
             width: Dimension.screenWidth,
-            height: Dimension.screenHeight * 0.05,
-            padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
+            height: Dimension.screenHeight * 0.06,
+            padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(7), horizontal: Dimension.CustomSize(10)),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleLightBlack),
             child:
-            Center(child: textWithFont(text: "EFFICIENCY CORE", color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900,)),
+            Center(child: textWithFont(text: "EFFICIENCY CORE", color: Colors.white, fontSize: 17, fontWeight: FontWeight.w900,)),
           )
         ],
       ),
@@ -405,14 +419,14 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleDarkSeaBlue),
       width: Dimension.screenWidth * 0.44,
-      height: Dimension.screenHeight * 0.25,
-      padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
+      height: Dimension.screenHeight * 0.3,
+      padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(15), horizontal: Dimension.CustomSize(10)),
       child: Stack(
         children: [
           Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleLightBlack),
             width: Dimension.screenWidth * 0.39,
-            height: Dimension.screenHeight * 0.24,
+            height: Dimension.screenHeight * 0.26,
             padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -423,7 +437,7 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
               Container(
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleDarkSeaBlue),
                 width: Dimension.screenWidth * 0.36,
-                height: Dimension.screenHeight * 0.11,
+                height: Dimension.screenHeight * 0.12,
                 padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
                 child: Row(
                   children: [
@@ -643,42 +657,42 @@ class _CpuInformationPageState extends State<CpuInformationPage> {
   }
 
   //Widget ETC
-  Widget additional(){
-    Random objectname = Random();
-    int number = objectname.nextInt(QuotesRandom().quotesLenght());
-
-    // await prefs.setString(SharedPreferenceKey.ProcessorKey.name, "SD888");
-    // int day = DateTime.now().day;
-
-    int day = DateTime.now().day;
-
-
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          width:Dimension.screenWidth * 0.59,
-          height: Dimension.screenHeight * 0.15,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleDarkSeaBlue),
-          padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              textWithFont(text: "QUOTES OF THE DAY",  color: AppColor.littleLightBlack, fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold'),
-              SizedBox(height: Dimension.CustomSize(20),),
-              textWithFont(text: QuotesRandom().quotes(number),  color: AppColor.littleLightBlack, fontSize: 16, fontWeight: FontWeight.w900,),
-            ],
-          ),
-        ),
-        Container(
-          width:Dimension.screenWidth * 0.3,
-          height: Dimension.screenHeight * 0.15,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleDarkSeaBlue),
-          child: Image.asset('assets/image/img_data/additional_image.png', fit: BoxFit.fill,),
-        ),
-      ],
-    );
-
-  }
+  // Widget additional(){
+  //   Random objectname = Random();
+  //   int number = objectname.nextInt(QuotesRandom().quotesLenght());
+  //
+  //   // await prefs.setString(SharedPreferenceKey.ProcessorKey.name, "SD888");
+  //   // int day = DateTime.now().day;
+  //
+  //   int day = DateTime.now().day;
+  //
+  //
+  //
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //     children: [
+  //       Container(
+  //         width:Dimension.screenWidth * 0.59,
+  //         height: Dimension.screenHeight * 0.15,
+  //         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleDarkSeaBlue),
+  //         padding: EdgeInsets.symmetric(vertical: Dimension.CustomSize(10), horizontal: Dimension.CustomSize(10)),
+  //         child: Column(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             textWithFont(text: "QUOTES OF THE DAY",  color: AppColor.littleLightBlack, fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'openSansExtraBold'),
+  //             SizedBox(height: Dimension.CustomSize(20),),
+  //             textWithFont(text: QuotesRandom().quotes(number),  color: AppColor.littleLightBlack, fontSize: 16, fontWeight: FontWeight.w900,),
+  //           ],
+  //         ),
+  //       ),
+  //       Container(
+  //         width:Dimension.screenWidth * 0.3,
+  //         height: Dimension.screenHeight * 0.15,
+  //         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColor.littleDarkSeaBlue),
+  //         child: Image.asset('assets/image/img_data/additional_image.png', fit: BoxFit.fill,),
+  //       ),
+  //     ],
+  //   );
+  //
+  // }
 }

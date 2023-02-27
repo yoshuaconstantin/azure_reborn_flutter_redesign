@@ -22,6 +22,14 @@ class RequestRoot {
     await Root.exec(cmd: command);
   }
 
+  Future<void> nonReturnRootNewFunction (String shell) async {
+    await Root.execNewRootMethod(cmd: shell);
+  }
+
+  Future<void> nonReturnRootMinCFunction (String command) async {
+    await Root.exec(cmd: "-c ${command}");
+  }
+
   Future<String> returnStringRootFucntion (String command) async {
     String? returnStringResult = await Root.exec(cmd: command);
 
@@ -29,7 +37,7 @@ class RequestRoot {
   }
 
   Future<void> ChmodRootFunction (String command, String permission) async {
-    await Root.exec(cmd: "chmod ${permission} ${command}");
+    await Root.exec(cmd: "-c chmod ${permission} ${command}");
 
   }
 
