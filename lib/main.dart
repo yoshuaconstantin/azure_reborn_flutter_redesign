@@ -2,6 +2,8 @@ import 'package:azure_reborn/screen/cpu_information_screen/bloc/cpu_information_
 import 'package:azure_reborn/screen/home_body/home_body.dart';
 import 'package:azure_reborn/screen/home_body/home_body_bloc.dart';
 import 'package:azure_reborn/screen/profile_tuning_screen/bloc/profile_tuning_bloc.dart';
+import 'package:azure_reborn/screen/sign_in_screen/bloc/sign_in_bloc.dart';
+import 'package:azure_reborn/screen/sign_in_screen/sign_in_page.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen_bloc.dart';
 import 'package:azure_reborn/screen/thermal_manager_screen/bloc/thermal_manager_bloc.dart';
@@ -36,7 +38,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SplashScreenBloc(),),
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => CpuInformationBloc(),),
         BlocProvider(create: (_) => ProfileTuningBloc(),),
         BlocProvider(create: (_) => ThermalManagerBloc(),),
-
+        BlocProvider(create: (_) => SignInBloc(),),
 
 
       ],
@@ -57,15 +58,41 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
+}
   Widget seperator(){
-   if(Preferences.getInstance().contain(SharedPreferenceKey.ProcessorKey)){
-     return const HomeBody();
-   }else{
-     return const SplashScreen();
+   if (Preferences.getInstance().contain(SharedPreferenceKey.JWT_auth) && Preferences.getInstance().contain(SharedPreferenceKey.TOKEN)) {
+     if(Preferences.getInstance().contain(SharedPreferenceKey.ProcessorKey)){
+       return const HomeBody();
+     }else{
+       return const SplashScreen();
+     }
+  } else {
+     return const SignInPage();
    }
-  }
 
+}
+
+class DismissableKeyboard extends StatelessWidget {
+  final Widget widget;
+
+  const DismissableKeyboard({
+    Key? key,
+    required this.widget
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () {
+          FocusScopeNode focusScopeNode = FocusScope.of(context);
+
+          if (!focusScopeNode.hasPrimaryFocus && focusScopeNode.focusedChild != null) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          }
+        },
+        child: widget
+    );
+  }
 }
 
 

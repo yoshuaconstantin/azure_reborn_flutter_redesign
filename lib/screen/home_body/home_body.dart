@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -24,6 +25,7 @@ import '../../widget/home_chart.dart';
 import '../../widget/information_widget.dart';
 import '../../widget/noOverScroll.dart';
 import '../../widget/vertical_text.dart';
+import '../community_chat/community_chat_page.dart';
 import '../profile_tuning_screen/profile_tuning_page.dart';
 import 'home_body_bloc.dart';
 
@@ -207,7 +209,11 @@ class _HomeBodyState extends State<HomeBody> {
             width: Dimension.screenWidth * 0.15,
             child: NeumorphicButton(
               onPressed: (){
-
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WebSocketChat(),
+                    ));
               },
               style: NeumorphicStyle(
                   depth: -1,

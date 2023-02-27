@@ -56,6 +56,49 @@ class Constant {
 }
 
 
+class ApiUrl{
+  static String MAIN_BASE = MAIN_BASE_MAC;
+  static String SECONDARY_BASE = SECONDARY_BASE_MAC;
+
+  // Lokalnya jerry
+  static final String MAIN_BASE_MAC = "http://172.16.50.70:8080";
+  static final String SECONDARY_BASE_MAC = "http://172.16.50.70:8080";
+
+
+  static const String SIGN_IN = "/api/login";
+  static const String REFRESH_TOKEN = "/api/token-refresh";
+  static const String SIGN_OUT = "/api/logout";
+
+  static const String CREATE_ACCOUNT = "/api/create-account";
+  static const String ACCOUNT = "/api/user";
+  static const String UPADATE_PASSWORD = "/api/user";
+
+  static const String DASHBOARDS = "/api/home/dashboards";
+  static const String UPDATE_DASHBOARDS_DATA = "/api/home/update/dashboards/data";
+
+  static const String PROFILE_IMAGES = "/api/home/user/profile/image";
+  static const String PROFILES = "/api/home/user/profile";
+
+  static const String USER_FEEDBACK = "/api/home/user/feedback";
+
+  static const String COMMUNITY_CHAT = "/api/community/chat";
+
+  static const String COMMUNITY_POST = "/api/community/post";
+  static const String COMMUNITY_POST_LIKE = "/api/community/post/like";
+  static const String COMMUNITY_POST_COMMENT = "/api/community/post/comment";
+
+
+
+
+
+
+
+
+
+
+
+}
+
 enum SharedPreferenceKey {
   ProcessorKey,
   ModeActived,
@@ -67,7 +110,11 @@ enum SharedPreferenceKey {
   ChillTimesUsed,
   SmartTimesUsed,
   FastTimesUsed,
-
+  JWT_auth,
+  JWT_Expired_At,
+  TOKEN,
+  MAIN_BASE,
+  SECONDARY_BASE
 }
 
 class QuotesRandom{
