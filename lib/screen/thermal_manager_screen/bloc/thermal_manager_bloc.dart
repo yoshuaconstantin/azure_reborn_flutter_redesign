@@ -25,9 +25,9 @@ class ThermalManagerBloc extends Bloc<ThermalManagerEvent, ThermalManagerState> 
     try{
       emit(DoNothing());
 
-      await Root.execChmod755(path: Constant().thermalSettings );
+      //await Root.execChmod755(path: Constant().thermalSettings );
 
-      await Root.execNewRootMethod(cmd: "echo ${event.value.toString()} > ${Constant().thermalSettings}");
+      //await Root.execNewRootMethod(cmd: "echo ${event.value.toString()} > ${Constant().thermalSettings}");
 
       String ThermalCheck  = await RequestRoot().returnStringRootFucntion("cat ${Constant().thermalSettings}");
 

@@ -60,7 +60,7 @@ class ApiUrl{
   static String MAIN_BASE = MAIN_BASE_MAC;
   static String SECONDARY_BASE = SECONDARY_BASE_MAC;
 
-  // Lokalnya jerry
+  // Lokalnya jojo
   static final String MAIN_BASE_MAC = "http://172.16.50.70:8080";
   static final String SECONDARY_BASE_MAC = "http://172.16.50.70:8080";
 

@@ -8,7 +8,18 @@ import 'package:dio/dio.dart';
 import '../additional/constant.dart';
 import '../additional/preferences.dart';
 import '../helper/custom_catch.dart';
+import 'endpoint/community_post/comment/delete_comment/community_post_comment_delete_request.dart';
+import 'endpoint/community_post/comment/home_comment/community_post_comment_home_request.dart';
+import 'endpoint/community_post/comment/insert_comment/community_post_comment_insert_request.dart';
+import 'endpoint/community_post/comment/update_comment/community_post_comment_update_request.dart';
+import 'endpoint/community_post/like/community_post_like_request.dart';
+import 'endpoint/community_post/post/delete_post/community_post_delete_request.dart';
+import 'endpoint/community_post/post/insert_post/community_post_insert_request.dart';
+import 'endpoint/community_post/post/update_post/community_post_update_request.dart';
 import 'endpoint/dashboards/update/dashboards_home_update_request.dart';
+import 'endpoint/feedback/delete_feedback/feedback_delete_comment_request.dart';
+import 'endpoint/feedback/insert_feedback/feedback_insert_comment_request.dart';
+import 'endpoint/feedback/update_feedback/feedback_update_comment_request.dart';
 import 'endpoint/profile/insert_data/profile_insert_data_request.dart';
 import 'endpoint/profile/delete_image/profile_delete_image_request.dart';
 import 'endpoint/profile/update_image/profile_update_image_request.dart';
@@ -284,4 +295,304 @@ class ApiManager {
       }
     }
   }
+
+  Future<Response> getDataFeedback({required String Token, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.get(ApiUrl.USER_FEEDBACK, queryParameters: {"token":Token});
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return getDataFeedback(Token: Token, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> insertDataFeedback({required FeedbackInsertCommentRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.post(ApiUrl.PROFILES, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return insertDataFeedback(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> updateDataFeedback({required FeedbackUpdateCommentRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.put(ApiUrl.USER_FEEDBACK, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return updateDataFeedback(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> deleteDataFeedback({required FeedbackDeleteCommentRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.delete(ApiUrl.USER_FEEDBACK, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return deleteDataFeedback(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> getDataCommunityPost({required String Token, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.get(ApiUrl.COMMUNITY_POST, queryParameters: {"token":Token});
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return getDataCommunityPost(Token: Token, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> insertDataCommunityPost({required CommunityPostInsertRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.post(ApiUrl.COMMUNITY_POST, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return insertDataCommunityPost(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> updateDataCommunityPost({required CommunityPostUpdateRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.put(ApiUrl.COMMUNITY_POST, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return updateDataCommunityPost(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> deleteDataCommunityPost({required CommunityPostDeleteRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.delete(ApiUrl.COMMUNITY_POST, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return deleteDataCommunityPost(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> getDataCommunityPostComment({required CommunityPostCommentHomeRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.post(ApiUrl.COMMUNITY_POST_COMMENT, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return getDataCommunityPostComment(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> insertDataCommunityPostComment({required CommunityPostCommentInsertRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.post(ApiUrl.COMMUNITY_POST_COMMENT, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return insertDataCommunityPostComment(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> updateDataCommunityPostComment({required CommunityPostCommentUpdateRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.put(ApiUrl.COMMUNITY_POST_COMMENT, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return updateDataCommunityPostComment(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> deleteDataCommunityPostComment({required CommunityPostCommentDeleteRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.delete(ApiUrl.COMMUNITY_POST_COMMENT, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return deleteDataCommunityPostComment(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> likeCommunityPost({required CommunityPostLikeRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.post(ApiUrl.COMMUNITY_POST_LIKE, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return likeCommunityPost(data: data, secondTry: true);
+      }
+    }
+  }
+
 }

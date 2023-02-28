@@ -1,18 +1,18 @@
 
 import 'feedback_home_response_data.dart';
 
-class feedbackHomeResponse {
+class FeedbackHomeResponse {
   final int status;
   final String message;
   final List<feedbackHomeResponseData>? data;
 
-  feedbackHomeResponse({
+  FeedbackHomeResponse({
     required this.status,
     required this.message,
     required this.data
   });
 
-  factory feedbackHomeResponse.fromJson(Map<String, dynamic> json) {
+  factory FeedbackHomeResponse.fromJson(Map<String, dynamic> json) {
     List<feedbackHomeResponseData> Datas = [];
 
     if (json['data'] != null) {
@@ -21,7 +21,7 @@ class feedbackHomeResponse {
       });
     }
 
-    return feedbackHomeResponse(
+    return FeedbackHomeResponse(
       status: json['status'],
       message: json['message'],
       data: Datas,

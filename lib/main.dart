@@ -1,4 +1,6 @@
+import 'package:azure_reborn/screen/community_post_screen/bloc/community_post_bloc.dart';
 import 'package:azure_reborn/screen/cpu_information_screen/bloc/cpu_information_bloc.dart';
+import 'package:azure_reborn/screen/feedback_user_screen/bloc/feedback_user_bloc.dart';
 import 'package:azure_reborn/screen/home_body/home_body.dart';
 import 'package:azure_reborn/screen/home_body/home_body_bloc.dart';
 import 'package:azure_reborn/screen/profile_tuning_screen/bloc/profile_tuning_bloc.dart';
@@ -7,6 +9,7 @@ import 'package:azure_reborn/screen/sign_in_screen/sign_in_page.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen_bloc.dart';
 import 'package:azure_reborn/screen/thermal_manager_screen/bloc/thermal_manager_bloc.dart';
+import 'package:azure_reborn/screen/user_profile_screen/bloc/user_profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,15 +49,20 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ProfileTuningBloc(),),
         BlocProvider(create: (_) => ThermalManagerBloc(),),
         BlocProvider(create: (_) => SignInBloc(),),
+        BlocProvider(create: (_) => FeedbackUserBloc(),),
+        BlocProvider(create: (_) => CommunityPostBloc(),),
+        BlocProvider(create: (_) => UserProfileBloc(),),
 
 
       ],
-      child: GetMaterialApp(
-        title: 'Azure Reborn',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+      child: DismissableKeyboard(
+        widget: GetMaterialApp(
+          title: 'Azure Reborn',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: seperator(),
         ),
-        home: seperator(),
       ),
     );
   }

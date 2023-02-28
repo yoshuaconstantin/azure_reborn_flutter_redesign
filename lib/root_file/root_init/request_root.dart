@@ -23,7 +23,7 @@ class RequestRoot {
   }
 
   Future<void> nonReturnRootNewFunction (String shell) async {
-    await Root.execNewRootMethod(cmd: shell);
+    //await Root.execNewRootMethod(cmd: shell);
   }
 
   Future<void> nonReturnRootMinCFunction (String command) async {
