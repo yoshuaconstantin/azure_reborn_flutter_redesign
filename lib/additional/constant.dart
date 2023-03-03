@@ -73,6 +73,8 @@ class ApiUrl{
   static const String ACCOUNT = "/api/user";
   static const String UPADATE_PASSWORD = "/api/user";
 
+  static const String VALIDATE_PASSWORD = "/api/password-validation";
+
   static const String DASHBOARDS = "/api/home/dashboards";
   static const String UPDATE_DASHBOARDS_DATA = "/api/home/update/dashboards/data";
 

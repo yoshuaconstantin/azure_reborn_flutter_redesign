@@ -3,6 +3,10 @@ import 'package:azure_reborn/screen/cpu_information_screen/bloc/cpu_information_
 import 'package:azure_reborn/screen/feedback_user_screen/bloc/feedback_user_bloc.dart';
 import 'package:azure_reborn/screen/home_body/home_body.dart';
 import 'package:azure_reborn/screen/home_body/home_body_bloc.dart';
+import 'package:azure_reborn/screen/my_profile/change_password_screen/bloc/change_password_bloc.dart';
+import 'package:azure_reborn/screen/my_profile/delete_account_screen/bloc/delete_account_bloc.dart';
+import 'package:azure_reborn/screen/my_profile/profile_screen/bloc/profile_screen_bloc.dart';
+import 'package:azure_reborn/screen/my_profile/user_feedback_screen/bloc/user_feedback_bloc.dart';
 import 'package:azure_reborn/screen/profile_tuning_screen/bloc/profile_tuning_bloc.dart';
 import 'package:azure_reborn/screen/sign_in_screen/bloc/sign_in_bloc.dart';
 import 'package:azure_reborn/screen/sign_in_screen/sign_in_page.dart';
@@ -52,6 +56,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => FeedbackUserBloc(),),
         BlocProvider(create: (_) => CommunityPostBloc(),),
         BlocProvider(create: (_) => UserProfileBloc(),),
+        BlocProvider(create: (_) => ChangePasswordBloc(),),
+        BlocProvider(create: (_) => DeleteAccountBloc(),),
+        BlocProvider(create: (_) => ProfileScreenBloc(),),
+        BlocProvider(create: (_) => UserFeedbackBloc(),),
+
 
 
       ],

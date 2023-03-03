@@ -296,11 +296,13 @@ class ApiManager {
     }
   }
 
+
   Future<Response> getDataFeedback({required String Token, bool secondTry = false}) async {
     try {
       Dio dio = await getDio(withoutAuthorizationInterceptor: true);
 
       Response response = await dio.get(ApiUrl.USER_FEEDBACK, queryParameters: {"token":Token});
+
 
       return response;
     } on DioError catch (e) {
@@ -591,6 +593,29 @@ class ApiManager {
         PRIMARY = !PRIMARY;
 
         return likeCommunityPost(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> validateAccountPassword({required String password, required token, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio(withoutAuthorizationInterceptor: true);
+
+      Response response = await dio.get(ApiUrl.VALIDATE_PASSWORD, queryParameters: {"token":token, "password":password});
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return validateAccountPassword(token: token, password: password, secondTry: true);
       }
     }
   }
