@@ -8,6 +8,8 @@ import 'package:dio/dio.dart';
 import '../additional/constant.dart';
 import '../additional/preferences.dart';
 import '../helper/custom_catch.dart';
+import 'endpoint/account/change_password_account/change_password_account_request.dart';
+import 'endpoint/account/delete_account/delete_account_request.dart';
 import 'endpoint/community_post/comment/delete_comment/community_post_comment_delete_request.dart';
 import 'endpoint/community_post/comment/home_comment/community_post_comment_home_request.dart';
 import 'endpoint/community_post/comment/insert_comment/community_post_comment_insert_request.dart';
@@ -111,6 +113,53 @@ class ApiManager {
       }
     }
   }
+
+  Future<Response> updatePaswword({required ChangePasswordAccountRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio();
+
+      Response response = await dio.put(ApiUrl.ACCOUNT, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return updatePaswword(data: data, secondTry: true);
+      }
+    }
+  }
+
+  Future<Response> deleteAccount({required DeleteAccountRequest data, bool secondTry = false}) async {
+    try {
+      Dio dio = await getDio();
+
+      Response response = await dio.delete(ApiUrl.ACCOUNT, data: data);
+
+      return response;
+    } on DioError catch (e) {
+      if (secondTry) {
+        if(e.type == DioErrorType.response) {
+          rethrow;
+        } else {
+          String message = await CustomCatch.internetCatch();
+          throw Exception(message);
+        }
+      } else {
+        PRIMARY = !PRIMARY;
+
+        return deleteAccount(data: data, secondTry: true);
+      }
+    }
+  }
+
 
   Future<Response> refreshToken({required String Token, bool secondTry = false}) async {
     try {

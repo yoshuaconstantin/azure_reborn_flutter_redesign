@@ -41,10 +41,6 @@ class FeedbackUserBloc extends Bloc<FeedbackUserEvent, FeedbackUserState> {
 
         emit(onGetDataFeedbackSuccess(data: feedbackHomeResponse));
 
-      } else if (response.statusCode == 401) {
-        emit(onGetDataFeedbackFailed(message: response.data));
-      } else if (response.statusCode == 400) {
-        emit(onGetDataFeedbackFailed(message: response.data));
       } else {
         emit(onGetDataFeedbackFailed(message: response.data));
       }

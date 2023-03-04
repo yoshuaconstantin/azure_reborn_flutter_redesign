@@ -16,3 +16,14 @@ class onCheckPasswordFailed extends ChangePasswordState {
   onCheckPasswordFailed({required this.message});
 }
 
+class onChangePasswordLoading extends ChangePasswordState {}
+
+class onChangePasswordSuccess extends ChangePasswordState {}
+
+class onChangePasswordFailed extends ChangePasswordState {
+  final String message;
+
+  onChangePasswordFailed({required this.message});
+}
+
+class onChangePasswordFinished extends ChangePasswordState {}

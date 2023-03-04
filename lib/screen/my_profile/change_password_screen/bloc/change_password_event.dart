@@ -8,3 +8,9 @@ class onCheckPassword extends ChangePasswordEvent {
 
   onCheckPassword({required this.password});
 }
+
+class onChangePassword extends ChangePasswordEvent {
+  final String password;
+
+  onChangePassword({required this.password});
+}

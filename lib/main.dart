@@ -13,7 +13,6 @@ import 'package:azure_reborn/screen/sign_in_screen/sign_in_page.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen.dart';
 import 'package:azure_reborn/screen/splash_screen/splash_screen_bloc.dart';
 import 'package:azure_reborn/screen/thermal_manager_screen/bloc/thermal_manager_bloc.dart';
-import 'package:azure_reborn/screen/user_profile_screen/bloc/user_profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +54,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => SignInBloc(),),
         BlocProvider(create: (_) => FeedbackUserBloc(),),
         BlocProvider(create: (_) => CommunityPostBloc(),),
-        BlocProvider(create: (_) => UserProfileBloc(),),
         BlocProvider(create: (_) => ChangePasswordBloc(),),
         BlocProvider(create: (_) => DeleteAccountBloc(),),
         BlocProvider(create: (_) => ProfileScreenBloc(),),
