@@ -71,7 +71,8 @@ class ApiUrl{
 
   static const String CREATE_ACCOUNT = "/api/create-account";
   static const String ACCOUNT = "/api/user";
-  static const String UPADATE_PASSWORD = "/api/user";
+  static const String UPDATE_PASSWORD = "/api/update-password";
+  static const String DELETE_ACCOUNT = "/api/delete-account";
 
   static const String VALIDATE_PASSWORD = "/api/password-validation";
 
@@ -87,7 +88,8 @@ class ApiUrl{
 
   static const String COMMUNITY_POST = "/api/community/post";
   static const String COMMUNITY_POST_LIKE = "/api/community/post/like";
-  static const String COMMUNITY_POST_COMMENT = "/api/community/post/comment";
+  static const String COMMUNITY_COMMENT_GET_COMMENT = "/api/community/post/comment/get-comment";
+  static const String COMMUNITY_COMMENT = "/api/community/post/comment";
 
 
 

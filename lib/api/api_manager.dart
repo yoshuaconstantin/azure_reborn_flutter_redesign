@@ -535,7 +535,7 @@ class ApiManager {
     try {
       Dio dio = await getDio(withoutAuthorizationInterceptor: true);
 
-      Response response = await dio.post(ApiUrl.COMMUNITY_POST_COMMENT, data: data);
+      Response response = await dio.post(ApiUrl.COMMUNITY_COMMENT_GET_COMMENT, data: data);
 
       return response;
     } on DioError catch (e) {
@@ -558,7 +558,7 @@ class ApiManager {
     try {
       Dio dio = await getDio(withoutAuthorizationInterceptor: true);
 
-      Response response = await dio.post(ApiUrl.COMMUNITY_POST_COMMENT, data: data);
+      Response response = await dio.post(ApiUrl.COMMUNITY_COMMENT, data: data);
 
       return response;
     } on DioError catch (e) {
@@ -581,7 +581,7 @@ class ApiManager {
     try {
       Dio dio = await getDio(withoutAuthorizationInterceptor: true);
 
-      Response response = await dio.put(ApiUrl.COMMUNITY_POST_COMMENT, data: data);
+      Response response = await dio.put(ApiUrl.COMMUNITY_COMMENT, data: data);
 
       return response;
     } on DioError catch (e) {
@@ -604,7 +604,7 @@ class ApiManager {
     try {
       Dio dio = await getDio(withoutAuthorizationInterceptor: true);
 
-      Response response = await dio.delete(ApiUrl.COMMUNITY_POST_COMMENT, data: data);
+      Response response = await dio.delete(ApiUrl.COMMUNITY_COMMENT, data: data);
 
       return response;
     } on DioError catch (e) {
@@ -645,6 +645,7 @@ class ApiManager {
       }
     }
   }
+
 
   Future<Response> validateAccountPassword({required String password, required token, bool secondTry = false}) async {
     try {
